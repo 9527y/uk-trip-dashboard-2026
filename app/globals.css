@@ -330,9 +330,10 @@ body::before {
 .place-actions .place-name { margin-right: 2px; display: inline-flex; align-items: center; gap: 5px; color: #64727e; font-size: 13px; font-weight: 650; }
 .place-actions .place-name svg { width: 14px; height: 14px; color: #39756c; }
 .place-actions > a { min-height: 30px; margin: 0; padding: 0 9px; display: inline-flex; align-items: center; gap: 4px; border: 1px solid #ccd6cf; border-radius: 8px; background: white; color: #39756c; font-size: 13px; font-weight: 760; }
-.place-actions > a:last-child { border-color: #39756c; background: #39756c; color: white; }
+.place-actions > a.navigation-action { border-color: #39756c; background: #39756c; color: white; }
+.place-actions > a.menu-action { border-color: #e5bb30; background: #f3c846; color: #10243e; }
 .place-actions > a:hover { border-color: #e84632; color: #e84632; }
-.place-actions > a:last-child:hover { background: #e84632; color: white; }
+.place-actions > a.navigation-action:hover, .place-actions > a.menu-action:hover { background: #e84632; color: white; }
 .place-actions > a svg { width: 13px; height: 13px; }
 .place-actions.is-compact { margin-top: 5px; gap: 5px !important; }
 .place-actions.is-compact .place-name { flex-basis: 100%; font-size: 12px; }

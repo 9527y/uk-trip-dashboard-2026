@@ -8,7 +8,6 @@ import {
   ChevronRight,
   Clock3,
   Coins,
-  ExternalLink,
   ForkKnife,
   MapPin,
   MapPinned,
@@ -231,20 +230,16 @@ function getDayAgenda(day: (typeof days)[number]) {
 
 type Place = { name: string; query: string; mode: string };
 
-function mapSearchUrl(place: Place) {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.query)}`;
-}
-
 function navigationUrl(place: Place) {
   return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place.query)}&travelmode=${place.mode}`;
 }
 
-function PlaceActions({ place, compact = false }: { place: Place; compact?: boolean }) {
+function PlaceActions({ place, compact = false, menuHref }: { place: Place; compact?: boolean; menuHref?: string }) {
   return (
     <div className={`place-actions ${compact ? 'is-compact' : ''}`}>
       <span className="place-name"><MapPin />{place.name}</span>
-      <a href={mapSearchUrl(place)} target="_blank" rel="noreferrer" aria-label={`在地图查看 ${place.name}`}><ExternalLink />地图</a>
-      <a href={navigationUrl(place)} target="_blank" rel="noreferrer" aria-label={`导航到 ${place.name}`}><Navigation />导航</a>
+      <a className="navigation-action" href={navigationUrl(place)} target="_blank" rel="noreferrer" aria-label={`在地图查看并导航到 ${place.name}`}><Navigation />地图导航</a>
+      {menuHref && <a className="menu-action" href={menuHref} target="_blank" rel="noreferrer" aria-label={`查看 ${place.name} 的菜单或营业信息`}><ForkKnife />菜单</a>}
     </div>
   );
 }
@@ -252,14 +247,21 @@ function PlaceActions({ place, compact = false }: { place: Place; compact?: bool
 const foodLinks = [
   ['Regency Café', 'https://regencycafe.co.uk/menu'],
   ['Borough Market', 'https://boroughmarket.org.uk/visit-us/'],
+  ['Shellseekers / Applebee’s Fish', 'https://applebeesfish.com/'],
   ['Roti King', 'https://rotiking.com/location/euston/'],
+  ['Master Wei', 'https://master-wei.com/'],
   ['Oxford Covered Market', 'https://oxford-coveredmarket.co.uk/'],
   ['Chaiwalla', 'https://chaiwalla.uk/menu'],
   ['Sally Lunn’s', 'https://www.sallylunns.co.uk/menus/'],
   ['Shambles Kitchen', 'https://www.shambleskitchen.co.uk/'],
   ['Oink', 'https://www.oinkhogroast.co.uk/shops/victoria-street/'],
+  ['MUMS Great Comfort Food', 'https://deliveroo.co.uk/menu/edinburgh/old-town-and-canongate/mums-great-comfort-food'],
   ['Mosque Kitchen', 'https://www.mosquekitchen.com/contact-us'],
 ];
+
+function foodInfoUrl(name: string) {
+  return foodLinks.find(([place]) => name.includes(place) || place.includes(name))?.[1];
+}
 
 function formatCountdown(target: number, now: number) {
   if (!now) return '正在计算';
@@ -416,7 +418,7 @@ export default function Home() {
   const mealSummary = days.flatMap((day) => day.food.map((meal) => ({
     day,
     meal,
-    href: foodLinks.find(([name]) => meal.name.includes(name) || name.includes(meal.name))?.[1],
+    href: foodInfoUrl(meal.name),
   })));
 
   function updateTask(id: string, value: boolean) {
@@ -470,7 +472,7 @@ export default function Home() {
               <div className="now-agenda">
                 {activeAgenda.map((entry) => entry.kind === 'meal' ? (
                   <div className="now-agenda-item is-meal" key={entry.key}>
-                    <span>{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small><PlaceActions place={entry.meal.location} compact /></div><b>{entry.meal.price}</b>
+                    <span>{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small><PlaceActions place={entry.meal.location} menuHref={foodInfoUrl(entry.meal.name)} compact /></div><b>{entry.meal.price}</b>
                   </div>
                 ) : (
                   <div className="now-agenda-item" key={entry.key}>
@@ -571,7 +573,7 @@ export default function Home() {
 
         <section className="section route-section" id="route">
           <div className="section-heading"><div><p className="eyebrow"><MapPin /> 逐日执行</p><h2>一路向北</h2></div><span className="section-metric">8 晚 · 5 城</span></div>
-          <p className="section-intro">每一站都可以先看地图，或用你当时的位置直接开始导航；跨城移动默认使用公共交通。</p>
+          <p className="section-intro">点“地图导航”即可查看地点，并以你当时的位置为起点；跨城移动默认使用公共交通。</p>
           <div className="timeline">
             {days.map((day, index) => {
               const start = new Date(day.start).getTime();
@@ -585,7 +587,7 @@ export default function Home() {
                     <div className="day-agenda">
                       {getDayAgenda(day).map((entry) => entry.kind === 'meal' ? (
                         <div className="agenda-row meal-row" key={entry.key}>
-                          <span className="agenda-marker"><ForkKnife /></span><span className="agenda-type">{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small><PlaceActions place={entry.meal.location} /></div><b>{entry.meal.price}</b>
+                          <span className="agenda-marker"><ForkKnife /></span><span className="agenda-type">{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small><PlaceActions place={entry.meal.location} menuHref={foodInfoUrl(entry.meal.name)} /></div><b>{entry.meal.price}</b>
                         </div>
                       ) : (
                         <div className="agenda-row" key={entry.key}>
@@ -616,8 +618,7 @@ export default function Home() {
             <article className="meal-summary-card" key={`${day.date}-${meal.name}`}>
               <div className="meal-summary-meta"><span>{day.date} · {day.city} · {meal.time}</span><b>{meal.price}</b></div>
               <h3>{meal.name}</h3><p>{meal.dish}</p>
-              <PlaceActions place={meal.location} compact />
-              {href && <a href={href} target="_blank" rel="noreferrer">查看菜单或营业信息 <ExternalLink /></a>}
+              <PlaceActions place={meal.location} menuHref={href} compact />
             </article>
           ))}</div>
           <p className="source-note">价格和营业时间在 2026-09-08 核对；旅行当天仍以店铺公告为准。London 交通请全程使用同一张卡或同一台手机触碰闸机，以正确计算每日封顶。</p>
