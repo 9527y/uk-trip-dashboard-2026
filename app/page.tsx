@@ -50,6 +50,30 @@ const taskSeed = [
   { id: 'checkin', label: '完成去程在线值机', group: '9/27–9/28', done: false },
 ];
 
+const prepStages = [
+  {
+    end: new Date('2026-09-15T00:00:00+08:00').getTime(),
+    range: '现在–9/14',
+    title: '预订与锁定阶段',
+    summary: '先处理价格和余量最容易变化的项目。',
+    taskIds: ['stays', 'trains', 'attractions'],
+  },
+  {
+    end: new Date('2026-09-25T00:00:00+08:00').getTime(),
+    range: '9/15–9/24',
+    title: '确认与补齐阶段',
+    summary: '把保险、网络、行李和机场交通逐项确认。',
+    taskIds: ['insurance', 'esim', 'bags', 'airport'],
+  },
+  {
+    end: TRIP_START,
+    range: '9/25–9/28',
+    title: '值机与出发阶段',
+    summary: '收好证件和登机牌，按起飞时间倒推到机场。',
+    taskIds: ['checkin', 'bags', 'airport'],
+  },
+];
+
 const trainSeed = [
   { id: 'lon-oxf', date: '10/02 周五', route: 'London Paddington → Oxford', local: '2026-10-02T08:00', note: '暂定 08:00｜直达约 1 小时' },
   { id: 'oxf-bth', date: '10/02 周五', route: 'Oxford → Bath Spa', local: '2026-10-02T16:30', note: '暂定 16:30｜优先 GWR 直达' },
@@ -66,6 +90,7 @@ const days = [
       { time: '早午餐', name: 'Regency Café', dish: '英式早餐套餐', price: '£9.99' },
       { time: '晚餐', name: 'Chinatown', dish: '面食或烧味饭', price: '£12–18' },
     ],
+    flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '第一天不要排长队景点，给入境和时差留余量。',
   },
   {
@@ -76,6 +101,7 @@ const days = [
       { time: '午餐', name: 'Shellseekers / Applebee’s Fish', dish: '鱼肉三明治或海鲜', price: '£12–20' },
       { time: '晚餐', name: 'Roti King Euston', dish: 'Roti canai 或 nasi lemak', price: '£12–18' },
     ],
+    flow: ['step:0', 'step:1', 'meal:0', 'step:2', 'meal:1'],
     tip: 'Kappacasein 周三关闭；不要专程排它的芝士吐司。',
   },
   {
@@ -86,6 +112,7 @@ const days = [
       { time: '午餐', name: 'Master Wei · Bloomsbury', dish: '油泼或牛肉 biangbiang 面', price: '£13–18' },
       { time: '补给', name: '超市 meal deal', dish: '三明治 + 零食 + 饮料', price: '约 £5' },
     ],
+    flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '晚上整理行李并下载第二天两段火车票。',
   },
   {
@@ -96,6 +123,7 @@ const days = [
       { time: '午餐', name: 'Oxford Covered Market', dish: 'Sasi’s Thai / Pieminister', price: '£9–14' },
       { time: '晚餐', name: 'Chaiwalla · Bath', dish: '咖喱饭或 wrap + samosa', price: '£8–10' },
     ],
+    flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: 'Oxford 只参观一所学院，宁可从容赶车。',
   },
   {
@@ -106,6 +134,7 @@ const days = [
       { time: '早午餐', name: 'Sally Lunn’s', dish: 'Sally Lunn bun', price: '£8–15' },
       { time: '列车餐', name: '超市补给', dish: '水、三明治和水果', price: '£6–9' },
     ],
+    flow: ['step:0', 'meal:0', 'step:1', 'meal:1', 'step:2'],
     tip: 'Sally Lunn’s 12:30–14:30 最忙，Roman Baths 后尽早去。',
   },
   {
@@ -116,6 +145,7 @@ const days = [
       { time: '早午餐', name: 'Shambles Kitchen', dish: '烟熏猪肉或牛肉三明治', price: '£10.50–11.90' },
       { time: '晚餐', name: 'Oink · Victoria Street', dish: '猪肉卷，可配 haggis stuffing', price: '£6.65–11.95' },
     ],
+    flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '先吃早午餐再进 Minster，别把吃饭押在赶车空档。',
   },
   {
@@ -126,6 +156,7 @@ const days = [
       { time: '午餐', name: 'Oink', dish: 'Piglet 小份猪肉卷', price: '£6.65' },
       { time: '晚餐', name: 'MUMS Great Comfort Food', dish: '香肠、土豆泥和肉汁', price: '£15–22' },
     ],
+    flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '城堡和山顶风大，随身带防水外套。',
   },
   {
@@ -136,6 +167,7 @@ const days = [
       { time: '午餐', name: 'Mosque Kitchen', dish: '咖喱饭或烤肉，素食可选', price: '£10–15' },
       { time: '晚餐', name: '超市 + Hostel', dish: '轻食并整理行李', price: '£6–10' },
     ],
+    flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '06:50 起可办理回程值机；晚上保存两段登机牌。',
   },
   {
@@ -146,9 +178,19 @@ const days = [
       { time: '早餐', name: 'Hostel / 超市', dish: '面包、水果和咖啡', price: '£5–8' },
       { time: '机场', name: '登机前补给', dish: '简餐 + 空水瓶过安检', price: '£8–12' },
     ],
+    flow: ['meal:0', 'step:0', 'step:1', 'meal:1', 'step:2'],
     tip: 'FRA 中转不建议进城；先确认登机口再休息。',
   },
 ];
+
+function getDayAgenda(day: (typeof days)[number]) {
+  return day.flow.map((entry) => {
+    const [kind, rawIndex] = entry.split(':');
+    const index = Number(rawIndex);
+    if (kind === 'meal') return { kind: 'meal' as const, meal: day.food[index], key: `${day.date}-meal-${index}` };
+    return { kind: 'plan' as const, text: day.steps[index], number: index + 1, key: `${day.date}-step-${index}` };
+  });
+}
 
 const foodLinks = [
   ['Regency Café', 'https://regencycafe.co.uk/menu'],
@@ -176,6 +218,19 @@ function formatCountdown(target: number, now: number) {
 
 function ukTimeToInstant(local: string) {
   return new Date(`${local}:00+01:00`).getTime();
+}
+
+function formatCurrentMoment(now: number, timeZone: string) {
+  if (!now) return '正在同步当前时间';
+  return new Intl.DateTimeFormat('zh-CN', {
+    timeZone,
+    month: 'long',
+    day: 'numeric',
+    weekday: 'short',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  }).format(new Date(now));
 }
 
 export default function Home() {
@@ -281,6 +336,31 @@ export default function Home() {
   const taskProgress = Math.round((completed / taskSeed.length) * 100);
   const tripProgress = now ? Math.max(0, Math.min(100, ((now - TRIP_START) / (TRIP_END - TRIP_START)) * 100)) : 0;
   const nextMilestone = useMemo(() => milestones.find((item) => item.time > now) ?? milestones.at(-1)!, [now]);
+  const firstTripDayStart = new Date(days[0].start).getTime();
+  const activeDayIndex = now ? days.findIndex((day) => now >= new Date(day.start).getTime() && now <= new Date(day.end).getTime()) : -1;
+  const activeDay = activeDayIndex >= 0 ? days[activeDayIndex] : null;
+  const beforeTrip = !now || now < TRIP_START;
+  const outbound = now >= TRIP_START && now < firstTripDayStart;
+  const afterTrip = now > TRIP_END;
+  const prepStage = prepStages.find((stage) => now < stage.end) ?? prepStages.at(-1)!;
+  const stageTasks = prepStage.taskIds.map((id) => taskSeed.find((task) => task.id === id)!).filter((task) => !tasks[task.id]);
+  const remainingTasks = taskSeed.filter((task) => !tasks[task.id]);
+  const focusTasks = stageTasks.length ? stageTasks : remainingTasks;
+  const focusSteps = activeDay?.steps ?? (outbound
+    ? ['提前抵达 HKG 并完成安检', '苏黎世转机 55 分钟，跟随转机指示快速前往登机口', '抵达 LHR 后乘 Elizabeth line 进城']
+    : afterTrip
+      ? ['确认所有消费记录', '整理照片和票据', '完成后续报销或旅行复盘']
+      : []);
+  const phaseLabel = beforeTrip ? '出发前 · 当前阶段' : outbound ? '旅途中 · 去程航班' : afterTrip ? '旅程结束' : `旅行中 · 第 ${activeDayIndex + 1} 天`;
+  const phaseTitle = beforeTrip ? prepStage.title : outbound ? '正在前往伦敦' : afterTrip ? '已经安全回到香港' : activeDay!.title;
+  const phaseSummary = beforeTrip ? prepStage.summary : outbound ? '今晚的重点是顺利转机和保留休息时间。' : afterTrip ? '主要行程已经完成，页面会保留全部记录供回看。' : `${activeDay!.city} · ${activeDay!.date} ${activeDay!.weekday}`;
+  const currentTimeZone = beforeTrip || afterTrip ? 'Asia/Hong_Kong' : 'Europe/London';
+  const activeAgenda = activeDay ? getDayAgenda(activeDay) : [];
+  const mealSummary = days.flatMap((day) => day.food.map((meal) => ({
+    day,
+    meal,
+    href: foodLinks.find(([name]) => meal.name.includes(name) || name.includes(meal.name))?.[1],
+  })));
 
   function updateTask(id: string, value: boolean) {
     const next = { ...tasks, [id]: value };
@@ -303,18 +383,64 @@ export default function Home() {
   return (
     <main>
       <nav className="topbar" aria-label="页面导航">
-        <a className="brand" href="#top" aria-label="返回顶部"><span className="brand-mark">UK</span><span>Tripboard</span></a>
-        <div className="nav-links"><a href="#todo">待办</a><a href="#map">地图</a><a href="#route">行程</a><a href="#trains">列车</a><a href="#money">换汇</a></div>
+        <a className="brand" href="#now" aria-label="返回当前安排"><span className="brand-mark">UK</span><span>Tripboard</span></a>
+        <div className="nav-links"><a href="#now">现在</a><a href="#todo">待办</a><a href="#map">地图</a><a href="#route">行程</a><a href="#trains">列车</a><a href="#money">换汇</a></div>
         <span className="date-chip">9/28–10/08</span>
       </nav>
 
       <div className="page-shell" id="top">
+        <section className={`now-board ${beforeTrip ? 'is-prep' : activeDay ? 'is-travel' : ''}`} id="now" aria-labelledby="now-title">
+          <div className="now-summary">
+            <p className="live-label"><span aria-hidden="true" />{phaseLabel}</p>
+            <p className="now-clock">{formatCurrentMoment(now, currentTimeZone)} · {beforeTrip || afterTrip ? '香港时间' : '英国时间'}</p>
+            <h1 id="now-title">{phaseTitle}</h1>
+            <p>{phaseSummary}</p>
+            {beforeTrip && <span className="stage-range">本阶段 {prepStage.range}</span>}
+          </div>
+
+          <article className="now-actions" aria-label="当前要做的事情">
+            <div className="now-panel-heading"><span>现在要做</span><strong>{beforeTrip ? `${focusTasks.length} 项待处理` : activeDay ? '今日安排' : '当前安排'}</strong></div>
+            {beforeTrip ? (
+              focusTasks.length ? <div className="now-task-list">
+                {focusTasks.slice(0, 4).map((task, index) => (
+                  <label className="now-task" htmlFor={`focus-${task.id}`} key={task.id}>
+                    <Checkbox id={`focus-${task.id}`} checked={tasks[task.id]} onCheckedChange={(checked) => updateTask(task.id, Boolean(checked))} aria-label={task.label} />
+                    <span><b>{index === 0 ? '先做' : `接着 ${index + 1}`}</b><strong>{task.label}</strong><small>{task.group}</small></span>
+                  </label>
+                ))}
+              </div> : <div className="focus-complete"><CheckCircle2 /><strong>出发前清单已经全部完成</strong><span>可以安心等待值机开放。</span></div>
+            ) : activeDay ? (
+              <div className="now-agenda">
+                {activeAgenda.map((entry) => entry.kind === 'meal' ? (
+                  <div className="now-agenda-item is-meal" key={entry.key}>
+                    <span>{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small></div><b>{entry.meal.price}</b>
+                  </div>
+                ) : (
+                  <div className="now-agenda-item" key={entry.key}>
+                    <span>{entry.number}</span><strong>{entry.text}</strong>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <ol className="now-step-list">{focusSteps.map((step) => <li key={step}>{step}</li>)}</ol>
+            )}
+            <a className="now-link" href={beforeTrip ? '#todo' : '#route'}>{beforeTrip ? '查看完整准备清单' : '查看完整行程'} <ChevronRight /></a>
+          </article>
+
+          <aside className="now-next" aria-label="下一时间节点">
+            <p className="now-panel-heading"><span>紧接着</span><Clock3 /></p>
+            <p className="next-countdown">{formatCountdown(nextMilestone.time, now)}</p>
+            <h2>{nextMilestone.label}</h2>
+            <p>{nextMilestone.note}</p>
+          </aside>
+        </section>
+
         <section className="hero-grid" aria-labelledby="trip-title">
           <div className="hero-copy">
             <p className="eyebrow"><Plane aria-hidden="true" /> 已确认 · Economy Light</p>
-            <h1 id="trip-title">九天穿过<br />英格兰与苏格兰</h1>
+            <h2 id="trip-title">九天穿过<br />英格兰与苏格兰</h2>
             <p className="route-line">Hong Kong <ArrowRight /> London <ArrowRight /> Edinburgh</p>
-            <div className="hero-actions"><a className="primary-action" href="#todo">查看下一步 <ChevronRight /></a><a className="secondary-action" href="#map">打开行程地图</a></div>
+            <div className="hero-actions"><a className="primary-action" href="#now">返回当前安排 <ChevronRight /></a><a className="secondary-action" href="#map">打开行程地图</a></div>
           </div>
           <figure className="hero-photo" aria-label="Edinburgh 城堡与城市天际线">
             <div className="photo-overlay"><span className="photo-city">Edinburgh</span><span className="photo-note">最后三晚 · 10/04–10/07</span></div>
@@ -398,9 +524,16 @@ export default function Home() {
                   <div className="day-rail" aria-hidden="true"><span>{index + 1}</span></div>
                   <div className="day-body">
                     <header className="day-header"><div><p className="day-date">{day.date} · {day.weekday} · {day.city}</p><h3>{day.title}</h3></div><span className={`state-badge ${state}`}>{state === 'current' ? '今天' : state === 'past' ? '完成' : '计划'}</span></header>
-                    <div className="day-content">
-                      <ol className="step-list">{day.steps.map((step) => <li key={step}>{step}</li>)}</ol>
-                      <div className="food-list">{day.food.map((meal) => <div className="meal" key={`${day.date}-${meal.name}`}><span className="meal-time">{meal.time}</span><strong>{meal.name}</strong><span>{meal.dish}</span><b>{meal.price}</b></div>)}</div>
+                    <div className="day-agenda">
+                      {getDayAgenda(day).map((entry) => entry.kind === 'meal' ? (
+                        <div className="agenda-row meal-row" key={entry.key}>
+                          <span className="agenda-marker"><ForkKnife /></span><span className="agenda-type">{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small></div><b>{entry.meal.price}</b>
+                        </div>
+                      ) : (
+                        <div className="agenda-row" key={entry.key}>
+                          <span className="agenda-marker">{entry.number}</span><span className="agenda-type">行程</span><strong>{entry.text}</strong>
+                        </div>
+                      ))}
                     </div>
                     <p className="day-tip"><Umbrella /> {day.tip}</p>
                   </div>
@@ -420,8 +553,14 @@ export default function Home() {
         </section>
 
         <section className="section food-sources" aria-labelledby="food-title">
-          <div className="section-heading"><div><p className="eyebrow"><ForkKnife /> 已核对营业信息</p><h2 id="food-title">餐饮清单</h2></div></div>
-          <div className="link-grid">{foodLinks.map(([name, href]) => <a key={name} href={href} target="_blank" rel="noreferrer"><span>{name}</span><ExternalLink /></a>)}</div>
+          <div className="section-heading"><div><p className="eyebrow"><ForkKnife /> 每日菜单汇总</p><h2 id="food-title">吃什么，一页查完</h2></div><span className="section-metric">{mealSummary.length} 餐建议</span></div>
+          <div className="meal-summary-grid">{mealSummary.map(({ day, meal, href }) => (
+            <article className="meal-summary-card" key={`${day.date}-${meal.name}`}>
+              <div className="meal-summary-meta"><span>{day.date} · {day.city} · {meal.time}</span><b>{meal.price}</b></div>
+              <h3>{meal.name}</h3><p>{meal.dish}</p>
+              {href && <a href={href} target="_blank" rel="noreferrer">查看菜单或营业信息 <ExternalLink /></a>}
+            </article>
+          ))}</div>
           <p className="source-note">价格和营业时间在 2026-09-08 核对；旅行当天仍以店铺公告为准。London 交通请全程使用同一张卡或同一台手机触碰闸机，以正确计算每日封顶。</p>
         </section>
 
