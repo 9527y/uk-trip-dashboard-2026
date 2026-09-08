@@ -12,6 +12,7 @@ import {
   ForkKnife,
   MapPin,
   MapPinned,
+  Navigation,
   Pencil,
   Plane,
   RotateCcw,
@@ -85,10 +86,14 @@ const days = [
   {
     date: '09/29', weekday: '周二', city: 'London', title: '初见伦敦 · Westminster',
     start: '2026-09-29T07:55:00+01:00', end: '2026-09-29T23:59:00+01:00',
-    steps: ['07:55 抵达 LHR，Elizabeth line 进城', 'Westminster → St James’s Park → Buckingham Palace', 'Trafalgar Square → South Bank，早点休息'],
+    steps: [
+      { text: '07:55 抵达 LHR，Elizabeth line 进城', location: { name: 'London Heathrow Airport', query: 'London Heathrow Airport', mode: 'transit' } },
+      { text: 'Westminster → St James’s Park → Buckingham Palace', location: { name: 'Buckingham Palace', query: 'Buckingham Palace London', mode: 'walking' } },
+      { text: 'Trafalgar Square → South Bank，早点休息', location: { name: 'South Bank', query: 'South Bank London', mode: 'walking' } },
+    ],
     food: [
-      { time: '早午餐', name: 'Regency Café', dish: '英式早餐套餐', price: '£9.99' },
-      { time: '晚餐', name: 'Chinatown', dish: '面食或烧味饭', price: '£12–18' },
+      { time: '早午餐', name: 'Regency Café', dish: '英式早餐套餐', price: '£9.99', location: { name: 'Regency Café', query: 'Regency Cafe 17-19 Regency Street London', mode: 'walking' } },
+      { time: '晚餐', name: 'Chinatown', dish: '面食或烧味饭', price: '£12–18', location: { name: 'London Chinatown', query: 'Chinatown Gerrard Street London', mode: 'walking' } },
     ],
     flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '第一天不要排长队景点，给入境和时差留余量。',
@@ -96,10 +101,14 @@ const days = [
   {
     date: '09/30', weekday: '周三', city: 'London', title: '城堡、塔桥与河岸',
     start: '2026-09-30T00:00:00+01:00', end: '2026-09-30T23:59:00+01:00',
-    steps: ['09:00 Tower of London，先看 Crown Jewels', 'Tower Bridge → Borough Market 午餐', 'Tate Modern → Millennium Bridge → St Paul’s 外观'],
+    steps: [
+      { text: '09:00 Tower of London，先看 Crown Jewels', location: { name: 'Tower of London', query: 'Tower of London', mode: 'transit' } },
+      { text: 'Tower Bridge → Borough Market 午餐', location: { name: 'Borough Market', query: 'Borough Market London', mode: 'walking' } },
+      { text: 'Tate Modern → Millennium Bridge → St Paul’s 外观', location: { name: 'St Paul’s Cathedral', query: "St Paul's Cathedral London", mode: 'walking' } },
+    ],
     food: [
-      { time: '午餐', name: 'Shellseekers / Applebee’s Fish', dish: '鱼肉三明治或海鲜', price: '£12–20' },
-      { time: '晚餐', name: 'Roti King Euston', dish: 'Roti canai 或 nasi lemak', price: '£12–18' },
+      { time: '午餐', name: 'Shellseekers / Applebee’s Fish', dish: '鱼肉三明治或海鲜', price: '£12–20', location: { name: 'Borough Market', query: 'Borough Market London', mode: 'walking' } },
+      { time: '晚餐', name: 'Roti King Euston', dish: 'Roti canai 或 nasi lemak', price: '£12–18', location: { name: 'Roti King Euston', query: 'Roti King Euston London', mode: 'transit' } },
     ],
     flow: ['step:0', 'step:1', 'meal:0', 'step:2', 'meal:1'],
     tip: 'Kappacasein 周三关闭；不要专程排它的芝士吐司。',
@@ -107,10 +116,14 @@ const days = [
   {
     date: '10/01', weekday: '周四', city: 'London', title: '博物馆与西区街巷',
     start: '2026-10-01T00:00:00+01:00', end: '2026-10-01T23:59:00+01:00',
-    steps: ['10:00 British Museum，只选 2–3 个主题', 'Covent Garden → Seven Dials', 'Soho → Chinatown → National Gallery 可选'],
+    steps: [
+      { text: '10:00 British Museum，只选 2–3 个主题', location: { name: 'British Museum', query: 'British Museum London', mode: 'transit' } },
+      { text: 'Covent Garden → Seven Dials', location: { name: 'Seven Dials', query: 'Seven Dials London', mode: 'walking' } },
+      { text: 'Soho → Chinatown → National Gallery 可选', location: { name: 'National Gallery', query: 'National Gallery London', mode: 'walking' } },
+    ],
     food: [
-      { time: '午餐', name: 'Master Wei · Bloomsbury', dish: '油泼或牛肉 biangbiang 面', price: '£13–18' },
-      { time: '补给', name: '超市 meal deal', dish: '三明治 + 零食 + 饮料', price: '约 £5' },
+      { time: '午餐', name: 'Master Wei · Bloomsbury', dish: '油泼或牛肉 biangbiang 面', price: '£13–18', location: { name: 'Master Wei Xi’an Cuisine', query: "Master Wei Xi'an Cuisine Bloomsbury London", mode: 'walking' } },
+      { time: '补给', name: '超市 meal deal', dish: '三明治 + 零食 + 饮料', price: '约 £5', location: { name: 'Soho 周边超市', query: 'supermarket near Soho London', mode: 'walking' } },
     ],
     flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '晚上整理行李并下载第二天两段火车票。',
@@ -118,10 +131,14 @@ const days = [
   {
     date: '10/02', weekday: '周五', city: 'Oxford → Bath', title: '大学城与古罗马温泉城',
     start: '2026-10-02T00:00:00+01:00', end: '2026-10-02T23:59:00+01:00',
-    steps: ['早班车至 Oxford，背包随身或提前预约寄存', 'Christ Church Meadow → Radcliffe Camera → 一所学院', '16:00–17:00 前往 Bath，夜游 Pulteney Bridge'],
+    steps: [
+      { text: '早班车至 Oxford，背包随身或提前预约寄存', location: { name: 'Oxford Station', query: 'Oxford Railway Station', mode: 'transit' } },
+      { text: 'Christ Church Meadow → Radcliffe Camera → 一所学院', location: { name: 'Radcliffe Camera', query: 'Radcliffe Camera Oxford', mode: 'walking' } },
+      { text: '16:00–17:00 前往 Bath，夜游 Pulteney Bridge', location: { name: 'Pulteney Bridge', query: 'Pulteney Bridge Bath', mode: 'transit' } },
+    ],
     food: [
-      { time: '午餐', name: 'Oxford Covered Market', dish: 'Sasi’s Thai / Pieminister', price: '£9–14' },
-      { time: '晚餐', name: 'Chaiwalla · Bath', dish: '咖喱饭或 wrap + samosa', price: '£8–10' },
+      { time: '午餐', name: 'Oxford Covered Market', dish: 'Sasi’s Thai / Pieminister', price: '£9–14', location: { name: 'Oxford Covered Market', query: 'Oxford Covered Market', mode: 'walking' } },
+      { time: '晚餐', name: 'Chaiwalla · Bath', dish: '咖喱饭或 wrap + samosa', price: '£8–10', location: { name: 'Chaiwalla Bath', query: 'Chaiwalla Bath', mode: 'walking' } },
     ],
     flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: 'Oxford 只参观一所学院，宁可从容赶车。',
@@ -129,10 +146,14 @@ const days = [
   {
     date: '10/03', weekday: '周六', city: 'Bath → York', title: 'Roman Baths 与北上列车',
     start: '2026-10-03T00:00:00+01:00', end: '2026-10-03T23:59:00+01:00',
-    steps: ['09:00 Roman Baths', 'Bath Abbey → The Circus → Royal Crescent', '14:00–15:00 北上 York，抵达后夜逛 Shambles'],
+    steps: [
+      { text: '09:00 Roman Baths', location: { name: 'Roman Baths', query: 'Roman Baths Bath UK', mode: 'walking' } },
+      { text: 'Bath Abbey → The Circus → Royal Crescent', location: { name: 'Royal Crescent', query: 'Royal Crescent Bath', mode: 'walking' } },
+      { text: '14:00–15:00 北上 York，抵达后夜逛 Shambles', location: { name: 'The Shambles', query: 'The Shambles York', mode: 'transit' } },
+    ],
     food: [
-      { time: '早午餐', name: 'Sally Lunn’s', dish: 'Sally Lunn bun', price: '£8–15' },
-      { time: '列车餐', name: '超市补给', dish: '水、三明治和水果', price: '£6–9' },
+      { time: '早午餐', name: 'Sally Lunn’s', dish: 'Sally Lunn bun', price: '£8–15', location: { name: 'Sally Lunn’s Historic Eating House', query: "Sally Lunn's Historic Eating House Bath", mode: 'walking' } },
+      { time: '列车餐', name: '超市补给', dish: '水、三明治和水果', price: '£6–9', location: { name: 'Bath Spa Station 周边超市', query: 'supermarket near Bath Spa Station', mode: 'walking' } },
     ],
     flow: ['step:0', 'meal:0', 'step:1', 'meal:1', 'step:2'],
     tip: 'Sally Lunn’s 12:30–14:30 最忙，Roman Baths 后尽早去。',
@@ -140,10 +161,14 @@ const days = [
   {
     date: '10/04', weekday: '周日', city: 'York → Edinburgh', title: '中世纪老城与苏格兰',
     start: '2026-10-04T00:00:00+01:00', end: '2026-10-04T23:59:00+01:00',
-    steps: ['城墙短线 → Shambles → Museum Gardens', '12:45 York Minster', '15:30–16:30 LNER 直达 Edinburgh'],
+    steps: [
+      { text: '城墙短线 → Shambles → Museum Gardens', location: { name: 'York Museum Gardens', query: 'York Museum Gardens', mode: 'walking' } },
+      { text: '12:45 York Minster', location: { name: 'York Minster', query: 'York Minster', mode: 'walking' } },
+      { text: '15:30–16:30 LNER 直达 Edinburgh', location: { name: 'Edinburgh Waverley', query: 'Edinburgh Waverley Station', mode: 'transit' } },
+    ],
     food: [
-      { time: '早午餐', name: 'Shambles Kitchen', dish: '烟熏猪肉或牛肉三明治', price: '£10.50–11.90' },
-      { time: '晚餐', name: 'Oink · Victoria Street', dish: '猪肉卷，可配 haggis stuffing', price: '£6.65–11.95' },
+      { time: '早午餐', name: 'Shambles Kitchen', dish: '烟熏猪肉或牛肉三明治', price: '£10.50–11.90', location: { name: 'Shambles Kitchen', query: 'Shambles Kitchen York', mode: 'walking' } },
+      { time: '晚餐', name: 'Oink · Victoria Street', dish: '猪肉卷，可配 haggis stuffing', price: '£6.65–11.95', location: { name: 'Oink Victoria Street', query: 'Oink Victoria Street Edinburgh', mode: 'walking' } },
     ],
     flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '先吃早午餐再进 Minster，别把吃饭押在赶车空档。',
@@ -151,10 +176,14 @@ const days = [
   {
     date: '10/05', weekday: '周一', city: 'Edinburgh', title: '城堡与 Royal Mile',
     start: '2026-10-05T00:00:00+01:00', end: '2026-10-05T23:59:00+01:00',
-    steps: ['09:30 Edinburgh Castle', 'Royal Mile → St Giles’ → Victoria Street', 'National Museum → 天气好再上 Calton Hill'],
+    steps: [
+      { text: '09:30 Edinburgh Castle', location: { name: 'Edinburgh Castle', query: 'Edinburgh Castle', mode: 'walking' } },
+      { text: 'Royal Mile → St Giles’ → Victoria Street', location: { name: 'Victoria Street', query: 'Victoria Street Edinburgh', mode: 'walking' } },
+      { text: 'National Museum → 天气好再上 Calton Hill', location: { name: 'Calton Hill', query: 'Calton Hill Edinburgh', mode: 'walking' } },
+    ],
     food: [
-      { time: '午餐', name: 'Oink', dish: 'Piglet 小份猪肉卷', price: '£6.65' },
-      { time: '晚餐', name: 'MUMS Great Comfort Food', dish: '香肠、土豆泥和肉汁', price: '£15–22' },
+      { time: '午餐', name: 'Oink', dish: 'Piglet 小份猪肉卷', price: '£6.65', location: { name: 'Oink Victoria Street', query: 'Oink Victoria Street Edinburgh', mode: 'walking' } },
+      { time: '晚餐', name: 'MUMS Great Comfort Food', dish: '香肠、土豆泥和肉汁', price: '£15–22', location: { name: 'MUMS Great Comfort Food', query: 'MUMS Great Comfort Food Edinburgh', mode: 'walking' } },
     ],
     flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '城堡和山顶风大，随身带防水外套。',
@@ -162,10 +191,14 @@ const days = [
   {
     date: '10/06', weekday: '周二', city: 'Edinburgh', title: '自然景观与机动日',
     start: '2026-10-06T00:00:00+01:00', end: '2026-10-06T23:59:00+01:00',
-    steps: ['晴天：Holyrood Park / Arthur’s Seat', '下午：Dean Village 或 Stockbridge', '雨天：National Museum + National Gallery'],
+    steps: [
+      { text: '晴天：Holyrood Park / Arthur’s Seat', location: { name: 'Arthur’s Seat', query: "Arthur's Seat Edinburgh", mode: 'walking' } },
+      { text: '下午：Dean Village 或 Stockbridge', location: { name: 'Dean Village', query: 'Dean Village Edinburgh', mode: 'walking' } },
+      { text: '雨天：National Museum + National Gallery', location: { name: 'National Museum of Scotland', query: 'National Museum of Scotland Edinburgh', mode: 'walking' } },
+    ],
     food: [
-      { time: '午餐', name: 'Mosque Kitchen', dish: '咖喱饭或烤肉，素食可选', price: '£10–15' },
-      { time: '晚餐', name: '超市 + Hostel', dish: '轻食并整理行李', price: '£6–10' },
+      { time: '午餐', name: 'Mosque Kitchen', dish: '咖喱饭或烤肉，素食可选', price: '£10–15', location: { name: 'Mosque Kitchen', query: 'Mosque Kitchen Edinburgh', mode: 'walking' } },
+      { time: '晚餐', name: '超市 + Hostel', dish: '轻食并整理行李', price: '£6–10', location: { name: 'Edinburgh Waverley 周边超市', query: 'supermarket near Edinburgh Waverley', mode: 'walking' } },
     ],
     flow: ['step:0', 'meal:0', 'step:1', 'step:2', 'meal:1'],
     tip: '06:50 起可办理回程值机；晚上保存两段登机牌。',
@@ -173,10 +206,14 @@ const days = [
   {
     date: '10/07', weekday: '周三', city: 'Edinburgh → HKG', title: '返程日',
     start: '2026-10-07T00:00:00+01:00', end: '2026-10-08T15:20:00+08:00',
-    steps: ['08:45–09:00 离开市区', 'Tram 约 30 分钟，09:45–10:00 到 EDI', '12:50 起飞；FRA 中转 5 小时 50 分钟'],
+    steps: [
+      { text: '08:45–09:00 离开市区', location: { name: 'Edinburgh Waverley', query: 'Edinburgh Waverley Station', mode: 'transit' } },
+      { text: 'Tram 约 30 分钟，09:45–10:00 到 EDI', location: { name: 'Edinburgh Airport', query: 'Edinburgh Airport', mode: 'transit' } },
+      { text: '12:50 起飞；FRA 中转 5 小时 50 分钟', location: { name: 'Frankfurt Airport', query: 'Frankfurt Airport', mode: 'transit' } },
+    ],
     food: [
-      { time: '早餐', name: 'Hostel / 超市', dish: '面包、水果和咖啡', price: '£5–8' },
-      { time: '机场', name: '登机前补给', dish: '简餐 + 空水瓶过安检', price: '£8–12' },
+      { time: '早餐', name: 'Hostel / 超市', dish: '面包、水果和咖啡', price: '£5–8', location: { name: 'Edinburgh Waverley 周边超市', query: 'supermarket near Edinburgh Waverley', mode: 'walking' } },
+      { time: '机场', name: '登机前补给', dish: '简餐 + 空水瓶过安检', price: '£8–12', location: { name: 'Edinburgh Airport', query: 'Edinburgh Airport', mode: 'transit' } },
     ],
     flow: ['meal:0', 'step:0', 'step:1', 'meal:1', 'step:2'],
     tip: 'FRA 中转不建议进城；先确认登机口再休息。',
@@ -188,8 +225,28 @@ function getDayAgenda(day: (typeof days)[number]) {
     const [kind, rawIndex] = entry.split(':');
     const index = Number(rawIndex);
     if (kind === 'meal') return { kind: 'meal' as const, meal: day.food[index], key: `${day.date}-meal-${index}` };
-    return { kind: 'plan' as const, text: day.steps[index], number: index + 1, key: `${day.date}-step-${index}` };
+    return { kind: 'plan' as const, step: day.steps[index], number: index + 1, key: `${day.date}-step-${index}` };
   });
+}
+
+type Place = { name: string; query: string; mode: string };
+
+function mapSearchUrl(place: Place) {
+  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.query)}`;
+}
+
+function navigationUrl(place: Place) {
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(place.query)}&travelmode=${place.mode}`;
+}
+
+function PlaceActions({ place, compact = false }: { place: Place; compact?: boolean }) {
+  return (
+    <div className={`place-actions ${compact ? 'is-compact' : ''}`}>
+      <span className="place-name"><MapPin />{place.name}</span>
+      <a href={mapSearchUrl(place)} target="_blank" rel="noreferrer" aria-label={`在地图查看 ${place.name}`}><ExternalLink />地图</a>
+      <a href={navigationUrl(place)} target="_blank" rel="noreferrer" aria-label={`导航到 ${place.name}`}><Navigation />导航</a>
+    </div>
+  );
 }
 
 const foodLinks = [
@@ -346,11 +403,11 @@ export default function Home() {
   const stageTasks = prepStage.taskIds.map((id) => taskSeed.find((task) => task.id === id)!).filter((task) => !tasks[task.id]);
   const remainingTasks = taskSeed.filter((task) => !tasks[task.id]);
   const focusTasks = stageTasks.length ? stageTasks : remainingTasks;
-  const focusSteps = activeDay?.steps ?? (outbound
+  const focusSteps = outbound
     ? ['提前抵达 HKG 并完成安检', '苏黎世转机 55 分钟，跟随转机指示快速前往登机口', '抵达 LHR 后乘 Elizabeth line 进城']
     : afterTrip
       ? ['确认所有消费记录', '整理照片和票据', '完成后续报销或旅行复盘']
-      : []);
+      : [];
   const phaseLabel = beforeTrip ? '出发前 · 当前阶段' : outbound ? '旅途中 · 去程航班' : afterTrip ? '旅程结束' : `旅行中 · 第 ${activeDayIndex + 1} 天`;
   const phaseTitle = beforeTrip ? prepStage.title : outbound ? '正在前往伦敦' : afterTrip ? '已经安全回到香港' : activeDay!.title;
   const phaseSummary = beforeTrip ? prepStage.summary : outbound ? '今晚的重点是顺利转机和保留休息时间。' : afterTrip ? '主要行程已经完成，页面会保留全部记录供回看。' : `${activeDay!.city} · ${activeDay!.date} ${activeDay!.weekday}`;
@@ -413,11 +470,11 @@ export default function Home() {
               <div className="now-agenda">
                 {activeAgenda.map((entry) => entry.kind === 'meal' ? (
                   <div className="now-agenda-item is-meal" key={entry.key}>
-                    <span>{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small></div><b>{entry.meal.price}</b>
+                    <span>{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small><PlaceActions place={entry.meal.location} compact /></div><b>{entry.meal.price}</b>
                   </div>
                 ) : (
                   <div className="now-agenda-item" key={entry.key}>
-                    <span>{entry.number}</span><strong>{entry.text}</strong>
+                    <span>{entry.number}</span><div><strong>{entry.step.text}</strong><PlaceActions place={entry.step.location} compact /></div>
                   </div>
                 ))}
               </div>
@@ -514,6 +571,7 @@ export default function Home() {
 
         <section className="section route-section" id="route">
           <div className="section-heading"><div><p className="eyebrow"><MapPin /> 逐日执行</p><h2>一路向北</h2></div><span className="section-metric">8 晚 · 5 城</span></div>
+          <p className="section-intro">每一站都可以先看地图，或用你当时的位置直接开始导航；跨城移动默认使用公共交通。</p>
           <div className="timeline">
             {days.map((day, index) => {
               const start = new Date(day.start).getTime();
@@ -527,11 +585,11 @@ export default function Home() {
                     <div className="day-agenda">
                       {getDayAgenda(day).map((entry) => entry.kind === 'meal' ? (
                         <div className="agenda-row meal-row" key={entry.key}>
-                          <span className="agenda-marker"><ForkKnife /></span><span className="agenda-type">{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small></div><b>{entry.meal.price}</b>
+                          <span className="agenda-marker"><ForkKnife /></span><span className="agenda-type">{entry.meal.time}</span><div><strong>{entry.meal.name}</strong><small>{entry.meal.dish}</small><PlaceActions place={entry.meal.location} /></div><b>{entry.meal.price}</b>
                         </div>
                       ) : (
                         <div className="agenda-row" key={entry.key}>
-                          <span className="agenda-marker">{entry.number}</span><span className="agenda-type">行程</span><strong>{entry.text}</strong>
+                          <span className="agenda-marker">{entry.number}</span><span className="agenda-type">行程</span><div><strong>{entry.step.text}</strong><PlaceActions place={entry.step.location} /></div>
                         </div>
                       ))}
                     </div>
@@ -558,6 +616,7 @@ export default function Home() {
             <article className="meal-summary-card" key={`${day.date}-${meal.name}`}>
               <div className="meal-summary-meta"><span>{day.date} · {day.city} · {meal.time}</span><b>{meal.price}</b></div>
               <h3>{meal.name}</h3><p>{meal.dish}</p>
+              <PlaceActions place={meal.location} compact />
               {href && <a href={href} target="_blank" rel="noreferrer">查看菜单或营业信息 <ExternalLink /></a>}
             </article>
           ))}</div>

@@ -326,6 +326,17 @@ body::before {
 .meal-summary-card p { margin: 0; color: #65727d; font-size: 13px; }
 .meal-summary-card a { margin-top: 17px; display: inline-flex; align-items: center; gap: 5px; color: #e84632; font-size: 12px; font-weight: 760; }
 .meal-summary-card a svg { width: 14px; height: 14px; }
+.place-actions { margin-top: 8px; display: flex !important; grid-template-columns: none !important; flex-wrap: wrap; align-items: center; gap: 6px !important; }
+.place-actions .place-name { margin-right: 2px; display: inline-flex; align-items: center; gap: 5px; color: #64727e; font-size: 13px; font-weight: 650; }
+.place-actions .place-name svg { width: 14px; height: 14px; color: #39756c; }
+.place-actions > a { min-height: 30px; margin: 0; padding: 0 9px; display: inline-flex; align-items: center; gap: 4px; border: 1px solid #ccd6cf; border-radius: 8px; background: white; color: #39756c; font-size: 13px; font-weight: 760; }
+.place-actions > a:last-child { border-color: #39756c; background: #39756c; color: white; }
+.place-actions > a:hover { border-color: #e84632; color: #e84632; }
+.place-actions > a:last-child:hover { background: #e84632; color: white; }
+.place-actions > a svg { width: 13px; height: 13px; }
+.place-actions.is-compact { margin-top: 5px; gap: 5px !important; }
+.place-actions.is-compact .place-name { flex-basis: 100%; font-size: 12px; }
+.place-actions.is-compact > a { min-height: 27px; padding-inline: 7px; font-size: 12px; }
 .source-note { margin: 18px 0 0; color: #687683; font-size: 13px; line-height: 1.55; }
 
 footer { margin-top: 90px; padding: 30px 0 0; border-top: 1px solid #d5dbd6; display: flex; justify-content: space-between; align-items: center; color: #687683; }
@@ -365,6 +376,7 @@ footer p { margin: 0; }
   .now-task small { grid-column: 2; }
   .agenda-row { grid-template-columns: 31px 48px 1fr; }
   .agenda-row > b { grid-column: 3; }
+  .place-actions .place-name { flex-basis: 100%; }
   .meal-summary-grid { grid-template-columns: 1fr; }
   .now-next { padding: 30px 24px; }
   .hero-grid { border-radius: 20px; }
