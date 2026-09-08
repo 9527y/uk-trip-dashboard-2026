@@ -24,7 +24,7 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build
+      - run: npm run build:pages
         env:
           GITHUB_PAGES: 'true'
       - uses: actions/configure-pages@v5
