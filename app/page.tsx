@@ -11,6 +11,7 @@ import {
   ExternalLink,
   ForkKnife,
   MapPin,
+  MapPinned,
   Pencil,
   Plane,
   RotateCcw,
@@ -22,6 +23,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress, ProgressLabel, ProgressValue } from '@/components/ui/progress';
+import { RouteMap } from '@/components/route-map';
 
 const TRIP_START = new Date('2026-09-28T23:05:00+08:00').getTime();
 const TRIP_END = new Date('2026-10-08T15:20:00+08:00').getTime();
@@ -302,7 +304,7 @@ export default function Home() {
     <main>
       <nav className="topbar" aria-label="页面导航">
         <a className="brand" href="#top" aria-label="返回顶部"><span className="brand-mark">UK</span><span>Tripboard</span></a>
-        <div className="nav-links"><a href="#todo">待办</a><a href="#route">行程</a><a href="#trains">列车</a><a href="#money">换汇</a></div>
+        <div className="nav-links"><a href="#todo">待办</a><a href="#map">地图</a><a href="#route">行程</a><a href="#trains">列车</a><a href="#money">换汇</a></div>
         <span className="date-chip">9/28–10/08</span>
       </nav>
 
@@ -312,7 +314,7 @@ export default function Home() {
             <p className="eyebrow"><Plane aria-hidden="true" /> 已确认 · Economy Light</p>
             <h1 id="trip-title">九天穿过<br />英格兰与苏格兰</h1>
             <p className="route-line">Hong Kong <ArrowRight /> London <ArrowRight /> Edinburgh</p>
-            <div className="hero-actions"><a className="primary-action" href="#todo">查看下一步 <ChevronRight /></a><a className="secondary-action" href="#route">展开每日行程</a></div>
+            <div className="hero-actions"><a className="primary-action" href="#todo">查看下一步 <ChevronRight /></a><a className="secondary-action" href="#map">打开行程地图</a></div>
           </div>
           <figure className="hero-photo" aria-label="Edinburgh 城堡与城市天际线">
             <div className="photo-overlay"><span className="photo-city">Edinburgh</span><span className="photo-note">最后三晚 · 10/04–10/07</span></div>
@@ -359,6 +361,12 @@ export default function Home() {
               <article className="priority-card dark-card"><span>值机提醒</span><h3>9/27 23:05 后尝试</h3><p>SWISS 去程值机；准备护照和六位预订编号。</p></article>
             </aside>
           </div>
+        </section>
+
+        <section className="section map-section" id="map">
+          <div className="section-heading"><div><p className="eyebrow"><MapPinned /> Route map</p><h2>五城位置与移动方向</h2></div><span className="section-metric">约 860 km 向北</span></div>
+          <p className="section-intro">编号就是旅行顺序。红色虚线是城市间方向示意；实际列车线路和站台以车票为准。地图支持拖动、缩放和点击标记。</p>
+          <RouteMap />
         </section>
 
         <section className="section" id="trains">
