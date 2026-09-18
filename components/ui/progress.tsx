@@ -67,6 +67,7 @@ function ProgressLabel({
 
 function ProgressValue({
   className,
+  children,
   ...props
 }: Omit<ProgressPrimitive.Value.Props, 'children'> & { children?: ReactNode }) {
   return (
@@ -77,6 +78,7 @@ function ProgressValue({
       )}
       data-slot="progress-value"
       {...props}
+      children={children === undefined ? undefined : () => children}
     />
   );
 }

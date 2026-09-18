@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'UK Tripboard 2026',
-  description: '英国行程、待办、列车倒计时、餐饮与换汇控制台',
+  description: '2026 英国旅行面板：伦敦 5 晚、剑桥与七姐妹白崖当天往返、爱丁堡 3 晚，含路线、火车公交、餐饮与出发清单。',
 };
 
 export default function RootLayout({
