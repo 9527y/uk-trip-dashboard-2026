@@ -96,13 +96,14 @@ export const taskSeed: TaskItem[] = [
   { id: 'edinburgh-castle', label: '预约 Edinburgh Castle', detail: '10/05 上午；按实际预约时间入场', group: '景点安排', action: '官网预约', href: 'https://www.edinburghcastle.scot/plan-your-visit/tickets', done: false },
   { id: 'leave-dates', label: '请假：9/29、9/30、10/8', detail: '北京时间共 3 天；9/28 下班赴港，10/9 上班、10/10 补班', group: '出发准备', done: false },
   { id: 'insurance', label: '购买旅行保险', detail: '核对医疗、延误和行李保障范围', group: '出发准备', done: false },
+  { id: 'card-first-payment', label: '确认银行卡可境外支付，现金暂留 £20', detail: '能刷卡就刷卡；£20 中留 £10 预备可退钥匙押金，核对主用卡及备用支付方式', group: '出发准备', action: '付款安排', href: '#money', done: false },
   { id: 'data-plan', label: '确认英国上网方案', detail: '按已买的 SIM／eSIM 套餐确认激活方式、有效期和流量', group: '出发准备', done: false },
   { id: 'bags', label: '核对 Economy Light 行李额度', detail: '确认两个背包分别符合 cabin bag / personal item', group: '出发准备', done: false },
   { id: 'pack-shell', label: '装入防风防水连帽外套', detail: '白崖与爱丁堡每天随身带', group: '打包', done: false },
   { id: 'pack-warm', label: '装入抓绒或薄毛衣保暖层', detail: '结合临行预报决定是否加轻薄羽绒', group: '打包', done: false },
   { id: 'pack-clothes', label: '准备快干衣物与长裤', detail: '上衣 3–4 件、长裤 2 条、内衣袜 4 套，中途洗衣', group: '打包', done: false },
   { id: 'pack-shoes', label: '准备防滑耐走鞋', detail: '海岸和山路需要抓地力，不穿新鞋直接长走', group: '打包', done: false },
-  { id: 'pack-tools', label: '准备转换插头、小锁和防水袋', detail: '加水瓶、充电宝；确认住宿是否提供毛巾', group: '打包', done: false },
+  { id: 'pack-tools', label: '准备转换插头、小锁和防水袋', detail: '自带挂锁、毛巾和转换头，减少青旅现金收费；加水瓶、充电宝', group: '打包', done: false },
   { id: 'weather-coast', label: '核对伦敦、剑桥、白崖和爱丁堡天气', detail: '临行和每天出门前看风雨；白崖可与伦敦日调换', group: '临行复核', done: false },
   { id: 'airport', label: '确定深圳 → HKG 去程交通', detail: '目标 9/28 20:00 前到 HKG；如有需要提前下班', group: '出发准备', done: false },
   { id: 'edi-airport', label: '确认 10/7 机场电车或 Airlink 100', detail: '从 Castle Rock 出发；选 Waverley Bridge 的 Airlink 100 或 Princes Street 电车，目标 09:45 到 EDI', group: '出发准备', action: '查电车', href: 'https://edinburghtrams.com/plan-journey/airport', done: false },
@@ -114,12 +115,12 @@ export const taskSections = [
   { title: '已确认', ids: ['flight', 'visa', 'stay-london-booked', 'stay-edinburgh-booked'] },
   { title: '先锁定北上交通', ids: ['train-london-edinburgh'] },
   { title: '两次当天往返与景点安排', ids: ['train-cambridge-return', 'train-seaford-return', 'white-cliffs-plan', 'westminster-abbey', 'cambridge-college', 'museum-oct2', 'edinburgh-castle'] },
-  { title: '轻装与出发准备', ids: ['leave-dates', 'insurance', 'data-plan', 'bags', 'pack-shell', 'pack-warm', 'pack-clothes', 'pack-shoes', 'pack-tools', 'weather-coast', 'airport', 'edi-airport', 'offline-v2', 'checkin'] },
+  { title: '轻装与出发准备', ids: ['leave-dates', 'insurance', 'card-first-payment', 'data-plan', 'bags', 'pack-shell', 'pack-warm', 'pack-clothes', 'pack-shoes', 'pack-tools', 'weather-coast', 'airport', 'edi-airport', 'offline-v2', 'checkin'] },
 ];
 
 export const prepStages = [
   { end: new Date('2026-09-23T00:00:00+08:00').getTime(), range: '现在–9/22', title: '锁定北上交通', summary: '两地 8 晚青旅已订；接着确认施工日的北上车票与景点预约。', taskIds: ['train-london-edinburgh', 'leave-dates', 'train-cambridge-return', 'cambridge-college', 'museum-oct2', 'edinburgh-castle'] },
-  { end: new Date('2026-09-27T00:00:00+08:00').getTime(), range: '9/23–9/26', title: '补齐出行与装备', summary: '复核公交、天气、上网和机场交通，白崖按短线准备。', taskIds: ['train-seaford-return', 'white-cliffs-plan', 'insurance', 'data-plan', 'bags', 'pack-shell', 'pack-warm', 'pack-clothes', 'pack-shoes', 'pack-tools', 'weather-coast', 'airport', 'edi-airport'] },
+  { end: new Date('2026-09-27T00:00:00+08:00').getTime(), range: '9/23–9/26', title: '补齐出行与装备', summary: '复核公交、天气、上网和机场交通，白崖按短线准备。', taskIds: ['train-seaford-return', 'white-cliffs-plan', 'insurance', 'card-first-payment', 'data-plan', 'bags', 'pack-shell', 'pack-warm', 'pack-clothes', 'pack-shoes', 'pack-tools', 'weather-coast', 'airport', 'edi-airport'] },
   { end: TRIP_START, range: '9/27–9/28', title: '值机与出发', summary: '保存票券，按起飞时间倒推赴港和到机场的时间。', taskIds: ['checkin', 'offline-v2', 'bags', 'airport', 'weather-coast'] },
 ];
 

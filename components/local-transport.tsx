@@ -44,12 +44,12 @@ export function LocalTransport() {
           <div className="connection-label"><TrainFront /><span>日常乘车与出行日期</span></div>
           <h3>两处基地，轻装出门</h3>
           <p>伦敦连住 5 晚，剑桥和白崖当天往返；大包留住宿。10/4 才携带全部行李北上爱丁堡。</p>
-          <p>伦敦地铁／铁路进出站使用同一张卡或同一设备；公交按当地上车刷卡规则。剑桥、白崖和爱丁堡车票按各运营商规则购买，不把伦敦交通封顶规则套用于全程。</p>
+          <p>优先刷银行卡：伦敦地铁进出站用同一张卡或同一设备，伦敦公交只在上车时刷卡。白崖 12 路若使用 Tap-on/Tap-off，则上下车都要刷同一张卡或设备。剑桥、白崖火车及爱丁堡交通按各运营商规则购票。</p>
           <p>白崖看天气再确定短线。若与 10/2 伦敦日互换，同步调整博物馆预约、两程火车和公交查询日期。</p>
-          <div className="connection-actions"><a href="https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/pay-as-you-go/contactless-and-mobile-pay-as-you-go" target="_blank" rel="noreferrer">伦敦刷卡说明 <ExternalLink /></a><a href={transportSources.river} target="_blank" rel="noreferrer">Cuckmere 河口提示 <ExternalLink /></a></div>
+          <div className="connection-actions"><a href="https://tfl.gov.uk/fares/ways-to-pay/pay-as-you-go" target="_blank" rel="noreferrer">伦敦刷卡说明 <ExternalLink /></a><a href="https://www.buses.co.uk/contactless" target="_blank" rel="noreferrer">白崖公交刷卡说明 <ExternalLink /></a><a href={transportSources.river} target="_blank" rel="noreferrer">Cuckmere 河口提示 <ExternalLink /></a></div>
         </article>
       </div>
-      <p className="source-note">交通入口于 2026-09-19 核对，9/20 按已订青旅更新接驳。车程为规划估算；公交班次、候车时间和票价以所选日期及当天公告为准。</p>
+      <p className="source-note">交通入口于 2026-09-19 核对，9/20 更新青旅接驳与刷卡说明。车程为规划估算；公交班次、候车时间和票价以所选日期及当天公告为准。</p>
     </section>
   );
 }

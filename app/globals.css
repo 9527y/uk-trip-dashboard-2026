@@ -392,6 +392,8 @@ body::before {
 .cash-answer > p:last-of-type { color: #4c5660; line-height: 1.55; }
 .cash-split { margin-top: 22px; display: grid; gap: 7px; }
 .cash-split span { display: flex; justify-content: space-between; padding-top: 7px; border-top: 1px solid rgb(16 36 62 / 16%); font-size: 13px; }
+.payment-note { margin: 20px 0 0; color: #c3cfd7; font-size: 13px; line-height: 1.7; }
+.payment-note a { color: #f3c846; text-decoration: underline; text-underline-offset: 3px; }
 .budget-card h3, .converter-card h3 { margin: 0 0 22px; display: flex; align-items: center; gap: 8px; font-size: 18px; }
 .budget-card h3 svg { width: 19px; color: #f3c846; }
 .budget-row, .budget-total { display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgb(255 255 255 / 10%); color: #c6d1d8; font-size: 14px; }
