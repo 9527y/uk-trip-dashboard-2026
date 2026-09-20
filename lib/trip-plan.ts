@@ -39,7 +39,7 @@ export const trainSeed: TrainItem[] = [
     id: 'lon-cbg', taskId: 'train-cambridge-return', date: '10/01 周四 · 去程', route: "London King's Cross → Cambridge", local: '2026-10-01T08:30', note: '建议搜索 08:00–09:00；未确认班次', operator: 'Great Northern',
     from: kingsCross, to: cambridge,
     routePlan: '优先直达快车，常规约 50–70 分钟；下车后步行约 25–30 分钟到学院区。目的站选 Cambridge（CBG）。',
-    arrive: '按住宿位置倒推，建议发车前 20–30 分钟到 King’s Cross。当天轻装，主行李留伦敦。',
+    arrive: 'Barmy Badger 步行至 Earl’s Court，乘 Piccadilly line 到 King’s Cross；建议发车前 20–30 分钟到火车站，主行李留青旅。',
     bookingUrl: railSearchUrl('KGX', 'CBG', '2026-10-01T08:30'), operatorUrl: transportSources.cambridge, liveUrl: 'https://www.nationalrail.co.uk/live-trains/departures/london-kings-cross/cambridge/',
   },
   {
@@ -53,7 +53,7 @@ export const trainSeed: TrainItem[] = [
     id: 'lon-sea', taskId: 'train-seaford-return', date: '10/03 周六 · 去程', route: 'London Victoria → Seaford · 经 Lewes', local: '2026-10-03T08:00', note: '建议搜索 07:30–08:30；看天气确认', operator: 'Southern',
     from: victoria, to: seaford,
     routePlan: '搜索 VIC → SEF，通常在 Lewes（LWS）换乘；站到站按约 1.5–2 小时估算。买覆盖全程的票，无需绕到 Brighton。',
-    arrive: '目标 07:30 左右到 Victoria，出门前准备午餐、水和防水外套；具体出门时间按住宿和所选列车调整。',
+    arrive: 'Barmy Badger 步行至 Earl’s Court，乘 District line 到 Victoria。若选择 08:00 左右火车，目标 07:30 到火车站；出门前备好午餐、水和外套。',
     bookingUrl: railSearchUrl('VIC', 'SEF', '2026-10-03T08:00'), operatorUrl: transportSources.seaford, liveUrl: 'https://www.nationalrail.co.uk/live-trains/departures/london-victoria/lewes/',
   },
   {
@@ -67,7 +67,7 @@ export const trainSeed: TrainItem[] = [
     id: 'lon-edi', taskId: 'train-london-edinburgh', date: '10/04 周日 · 换住宿', route: "London King's Cross → Edinburgh Waverley", local: '2026-10-04T09:30', note: '建议先查上午班次；全天用于转移', operator: 'LNER',
     from: kingsCross, to: edinburgh,
     routePlan: '10/3–4 Newcastle 至 Edinburgh 海岸线施工，LNER 经 Carlisle 绕行并延长旅程。时长、是否换乘和铁路替代巴士以当日查询为准。',
-    arrive: '先锁定可接受的实际行程再安排退房；建议发车前 30 分钟到站。午餐上车前买好，抵达后不锁定日落或付费项目。',
+    arrive: '从 Barmy Badger 退房，经 Earl’s Court 乘 Piccadilly line 到 King’s Cross，建议发车前 30 分钟到站。抵达后入住 Castle Rock，核对晚到安排。',
     bookingUrl: railSearchUrl('KGX', 'EDB', '2026-10-04T09:30'), operatorUrl: 'https://www.lner.co.uk/', liveUrl: 'https://www.nationalrail.co.uk/live-trains/departures/london-kings-cross/edinburgh/',
   },
 ];
@@ -85,8 +85,8 @@ export const taskSeed: TaskItem[] = [
   { id: 'flight', label: '国际机票已确认', group: '已完成', done: true },
   { id: 'visa', label: '英国签证有效', group: '已完成', done: true },
   { id: 'train-london-edinburgh', label: '确认 10/4 伦敦 → 爱丁堡车票', detail: '施工绕行；先核实实际时长和换乘，再订票', group: '优先处理', action: '搜索车次', href: trainSeed[4].bookingUrl, done: false },
-  { id: 'stay-london-5n', label: '确认 London 连住 5 晚', detail: '09/29 入住、10/04 退房；若此前仅订 3 晚，需延至 10/04', group: '优先处理', done: false },
-  { id: 'stay-edinburgh', label: '确认 Edinburgh 3 晚住宿', detail: '10/04 入住、10/07 退房；确认抵达较晚时如何入住', group: '优先处理', done: false },
+  { id: 'stay-london-booked', label: '已订 Barmy Badger · 伦敦 5 晚', detail: 'Hostelworld · 09/29 入住、10/04 退房', group: '已完成', action: '住宿信息', href: '#stays', done: true },
+  { id: 'stay-edinburgh-booked', label: '已订 Castle Rock · 爱丁堡 3 晚', detail: 'Hostelworld · 10/04 入住、10/07 退房', group: '已完成', action: '住宿信息', href: '#stays', done: true },
   { id: 'train-cambridge-return', label: '确认 10/1 剑桥往返两程车票', detail: 'KGX ↔ CBG；一起比较往返票和两张单程票', group: '城外出行', action: '搜索车次', href: trainSeed[0].bookingUrl, done: false },
   { id: 'train-seaford-return', label: '确认白崖当天的往返车票', detail: '暂定 10/3；VIC ↔ SEF 经 Lewes，结合天气和票种决定', group: '城外出行', action: '搜索车次', href: trainSeed[2].bookingUrl, done: false },
   { id: 'white-cliffs-plan', label: '确认白崖短线与返程公交', detail: '查风雨、9/27 起公交新表和末班；选择观景短线', group: '城外出行', action: '查公交', href: transportSources.coaster, done: false },
@@ -105,20 +105,20 @@ export const taskSeed: TaskItem[] = [
   { id: 'pack-tools', label: '准备转换插头、小锁和防水袋', detail: '加水瓶、充电宝；确认住宿是否提供毛巾', group: '打包', done: false },
   { id: 'weather-coast', label: '核对伦敦、剑桥、白崖和爱丁堡天气', detail: '临行和每天出门前看风雨；白崖可与伦敦日调换', group: '临行复核', done: false },
   { id: 'airport', label: '确定深圳 → HKG 去程交通', detail: '目标 9/28 20:00 前到 HKG；如有需要提前下班', group: '出发准备', done: false },
-  { id: 'edi-airport', label: '确认 10/7 机场电车或 Airlink 100', detail: '目标 09:45 到 EDI；按住宿位置选择上车点', group: '出发准备', action: '查电车', href: 'https://edinburghtrams.com/plan-journey/airport', done: false },
+  { id: 'edi-airport', label: '确认 10/7 机场电车或 Airlink 100', detail: '从 Castle Rock 出发；选 Waverley Bridge 的 Airlink 100 或 Princes Street 电车，目标 09:45 到 EDI', group: '出发准备', action: '查电车', href: 'https://edinburghtrams.com/plan-journey/airport', done: false },
   { id: 'offline-v2', label: '保存新版路线、车票与地址', detail: '含两次当天往返、白崖返程公交、北上工程公告', group: '临行复核', done: false },
   { id: 'checkin', label: '完成去程在线值机', detail: '临行查看 SWISS App，保存两段登机牌', group: '9/27–9/28', done: false },
 ];
 
 export const taskSections = [
-  { title: '已确认', ids: ['flight', 'visa'] },
-  { title: '先锁定北上交通与两地住宿', ids: ['train-london-edinburgh', 'stay-london-5n', 'stay-edinburgh'] },
+  { title: '已确认', ids: ['flight', 'visa', 'stay-london-booked', 'stay-edinburgh-booked'] },
+  { title: '先锁定北上交通', ids: ['train-london-edinburgh'] },
   { title: '两次当天往返与景点安排', ids: ['train-cambridge-return', 'train-seaford-return', 'white-cliffs-plan', 'westminster-abbey', 'cambridge-college', 'museum-oct2', 'edinburgh-castle'] },
   { title: '轻装与出发准备', ids: ['leave-dates', 'insurance', 'data-plan', 'bags', 'pack-shell', 'pack-warm', 'pack-clothes', 'pack-shoes', 'pack-tools', 'weather-coast', 'airport', 'edi-airport', 'offline-v2', 'checkin'] },
 ];
 
 export const prepStages = [
-  { end: new Date('2026-09-23T00:00:00+08:00').getTime(), range: '现在–9/22', title: '锁定住宿与北上交通', summary: '先确认伦敦 5 晚、爱丁堡 3 晚和施工日的北上车票。', taskIds: ['train-london-edinburgh', 'stay-london-5n', 'stay-edinburgh', 'leave-dates', 'train-cambridge-return', 'cambridge-college', 'museum-oct2', 'edinburgh-castle'] },
+  { end: new Date('2026-09-23T00:00:00+08:00').getTime(), range: '现在–9/22', title: '锁定北上交通', summary: '两地 8 晚青旅已订；接着确认施工日的北上车票与景点预约。', taskIds: ['train-london-edinburgh', 'leave-dates', 'train-cambridge-return', 'cambridge-college', 'museum-oct2', 'edinburgh-castle'] },
   { end: new Date('2026-09-27T00:00:00+08:00').getTime(), range: '9/23–9/26', title: '补齐出行与装备', summary: '复核公交、天气、上网和机场交通，白崖按短线准备。', taskIds: ['train-seaford-return', 'white-cliffs-plan', 'insurance', 'data-plan', 'bags', 'pack-shell', 'pack-warm', 'pack-clothes', 'pack-shoes', 'pack-tools', 'weather-coast', 'airport', 'edi-airport'] },
   { end: TRIP_START, range: '9/27–9/28', title: '值机与出发', summary: '保存票券，按起飞时间倒推赴港和到机场的时间。', taskIds: ['checkin', 'offline-v2', 'bags', 'airport', 'weather-coast'] },
 ];

@@ -41,6 +41,21 @@ import {
   type RailStation,
 } from '@/lib/trip-plan';
 import { LocalTransport } from '@/components/local-transport';
+import { Accommodation } from '@/components/accommodation';
+import { getNightStay, stayNavigationUrl } from '@/lib/stays';
+
+function NightStay({ dayStart }: { dayStart: string }) {
+  const overnight = getNightStay(dayStart);
+  if (!overnight) return null;
+  const { stay, night } = overnight;
+  return (
+    <div className="day-stay">
+      <Luggage aria-hidden="true" />
+      <div><span>当晚住宿 · 第 {night} 晚 / 共 {stay.nights} 晚</span><strong>{stay.name}</strong></div>
+      <a className="navigation-action" href={stayNavigationUrl(stay)} target="_blank" rel="noreferrer" aria-label={`导航到当晚住宿 ${stay.name}`}><Navigation />去青旅</a>
+    </div>
+  );
+}
 
 function getDayAgenda(day: TripDay) {
   return day.flow.map((entry) => {
@@ -233,7 +248,7 @@ export default function Home() {
   const remainingTasks = taskSeed.filter((task) => !tasks[task.id]);
   const focusTasks = stageTasks.length ? stageTasks : remainingTasks;
   const focusSteps = outbound
-    ? ['提前抵达 HKG 并完成安检', '苏黎世转机 55 分钟，跟随转机指示快速前往登机口', '抵达 LHR 后乘 Elizabeth line 进城']
+    ? ['提前抵达 HKG 并完成安检', '苏黎世转机 55 分钟，跟随转机指示快速前往登机口', '抵达 LHR 后乘 Piccadilly line 到 Earl’s Court，再步行到 Barmy Badger']
     : afterTrip
       ? ['确认所有消费记录', '整理照片和票据', '完成后续报销或旅行复盘']
       : [];
@@ -276,7 +291,7 @@ export default function Home() {
     <main>
       <nav className="topbar" aria-label="页面导航">
         <a className="brand" href="#now" aria-label="返回当前安排"><span className="brand-mark">UK</span><span>Tripboard</span></a>
-        <div className="nav-links"><a href="#now">现在</a><a href="#todo">待办</a><a href="#packing">穿衣</a><a href="#trains">火车</a><a href="#local-transport">公交</a><a href="#map">地图</a><a href="#route">行程</a><a href="#money">换汇</a></div>
+        <div className="nav-links"><a href="#now">现在</a><a href="#todo">待办</a><a href="#stays">住宿</a><a href="#packing">穿衣</a><a href="#trains">火车</a><a href="#local-transport">公交</a><a href="#map">地图</a><a href="#route">行程</a><a href="#money">换汇</a></div>
         <span className="date-chip">9/28–10/08</span>
       </nav>
 
@@ -300,12 +315,13 @@ export default function Home() {
                       <Checkbox id={`focus-${task.id}`} checked={tasks[task.id]} onCheckedChange={(checked) => updateTask(task.id, Boolean(checked))} aria-label={task.label} />
                       <span><b>{index === 0 ? '先做' : `接着 ${index + 1}`}</b><strong>{task.label}</strong><small>{task.detail ?? task.group}</small></span>
                     </label>
-                    {task.href && <a className="now-task-action" href={taskLink(task)} target="_blank" rel="noreferrer">{task.action ?? '打开'} <ExternalLink /></a>}
+                    {task.href && <a className="now-task-action" href={taskLink(task)} target={taskLink(task)?.startsWith('#') ? undefined : '_blank'} rel="noreferrer">{task.action ?? '打开'} <ExternalLink /></a>}
                   </div>
                 ))}
               </div> : <div className="focus-complete"><CheckCircle2 /><strong>出发前清单已经全部完成</strong><span>可以安心等待值机开放。</span></div>
             ) : activeDay ? (
               <>
+                <NightStay dayStart={activeDay.start} />
                 <div className="now-wear"><Shirt /><span><b>今天这样穿</b>{activeDay.wear}</span></div>
                 <div className="now-agenda">
                   {activeAgenda.map((entry) => entry.kind === 'meal' ? (
@@ -337,7 +353,7 @@ export default function Home() {
           <div className="hero-copy">
             <p className="eyebrow"><Plane aria-hidden="true" /> 已确认 · Economy Light</p>
             <h2 id="trip-title">两处基地<br />慢慢看英国</h2>
-            <p className="route-line">伦敦 5 晚 <ArrowRight /> 爱丁堡 3 晚</p><p className="hero-itinerary">10/1 剑桥当天往返 · 10/3 白崖短线当天往返</p><p className="hero-revision">2026-09-19 更新 · 英国行程 9/29–10/7</p>
+            <p className="route-line">伦敦 5 晚 <ArrowRight /> 爱丁堡 3 晚</p><p className="hero-itinerary">10/1 剑桥当天往返 · 10/3 白崖短线当天往返</p><p className="hero-revision">2026-09-20 更新 · 两家青旅已订 · 英国行程 9/29–10/7</p>
             <div className="hero-actions"><a className="primary-action" href="#now">返回当前安排 <ChevronRight /></a><a className="secondary-action" href="#map">打开行程地图</a></div>
           </div>
           <figure className="hero-photo" aria-label="Edinburgh 城堡与城市天际线">
@@ -380,7 +396,7 @@ export default function Home() {
                           <Checkbox id={`task-${task.id}`} checked={tasks[task.id]} onCheckedChange={(checked) => updateTask(task.id, Boolean(checked))} aria-label={task.label} />
                           <label className="todo-copy" htmlFor={`task-${task.id}`}><span className="todo-label">{task.label}</span>{task.detail && <small>{task.detail}</small>}</label>
                           <span className="todo-group">{task.group}</span>
-                          {task.href && <a className="task-action" href={taskLink(task)} target="_blank" rel="noreferrer">{task.action ?? '打开'} <ExternalLink /></a>}
+                          {task.href && <a className="task-action" href={taskLink(task)} target={taskLink(task)?.startsWith('#') ? undefined : '_blank'} rel="noreferrer">{task.action ?? '打开'} <ExternalLink /></a>}
                         </div>
                       ))}
                     </div>
@@ -390,12 +406,14 @@ export default function Home() {
             </article>
             <aside className="priority-stack">
               <article className="priority-card urgent"><span>优先级 01</span><h3>先确认 10/4 北上车票</h3><p>当天铁路施工绕行，先核实实际时长与换乘。剑桥和白崖各确认往返两程，并比较往返票和单程票总价。</p><a href="#trains">查看购票入口与上车站</a></article>
-              <article className="priority-card"><span>优先级 02</span><h3>伦敦 5 晚＋爱丁堡 3 晚</h3><p>伦敦 9/29 入住、10/4 退房；爱丁堡 10/4 入住、10/7 退房。确认地址、行李寄存和抵达较晚时的入住方式。</p></article>
+              <article className="priority-card"><span>优先级 02</span><h3>两家青旅已订</h3><p>Barmy Badger：9/29–10/4；Castle Rock：10/4–10/7。出发前补齐房型、付款与入住详情，确认早到寄存及晚到安排。</p><a href="#stays">查看住宿与导航</a></article>
               <article className="priority-card"><span>优先级 03</span><h3>留好白崖天气余地</h3><p>白崖暂定 10/3，按短线观景准备；遇强风大雨可与伦敦日调换，同时调整门票、火车与公交计划。</p></article>
               <article className="priority-card dark-card"><span>值机提醒</span><h3>9/27 23:05 后尝试</h3><p>SWISS 去程值机；准备护照和六位预订编号。</p></article>
             </aside>
           </div>
         </section>
+
+        <Accommodation />
 
         <section className="section packing-section" id="packing">
           <div className="section-heading"><div><p className="eyebrow"><Shirt /> Light packing</p><h2>两个背包怎么装</h2></div><span className="section-metric">约 7–19°C · 防风雨优先</span></div>
@@ -474,6 +492,7 @@ export default function Home() {
                   <div className="day-rail" aria-hidden="true"><span>{index + 1}</span></div>
                   <div className="day-body">
                     <header className="day-header"><div><p className="day-date">{day.date} · {day.weekday} · {day.city}</p><h3>{day.title}</h3></div><span className={`state-badge ${state}`}>{state === 'current' ? '今天' : state === 'past' ? '已过日期' : '计划'}</span></header>
+                    <NightStay dayStart={day.start} />
                     <div className="day-practical">
                       <div><Shirt /><span><b>今天怎么穿</b>{day.wear}</span></div>
                       <div><CircleAlert /><span><b>今天别忘了</b>{day.mustDo}</span></div>

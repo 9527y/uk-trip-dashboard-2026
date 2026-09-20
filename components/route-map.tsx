@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { Map as LeafletMap } from 'leaflet';
 import { ArrowLeftRight, BusFront, ExternalLink, Footprints, MapPinned, Plane, TrainFront } from 'lucide-react';
 import './route-map.css';
+import { londonStay, edinburghStay } from '@/lib/stays';
 
 type Coordinates = [number, number];
 type MapView = 'full' | 'london' | 'coast';
@@ -30,10 +31,10 @@ const viewBounds: Record<MapView, [Coordinates, Coordinates]> = {
 };
 
 const mainStops = [
-  { id: 'london', label: '伦敦', symbol: '伦', color: '#e84632', detail: '09/29 入住 → 10/04 退房 · 5 晚<br>剑桥、白崖均当天往返，行李留在伦敦。' },
+  { id: 'london', label: '伦敦', symbol: '伦', color: '#e84632', detail: '09/29 入住 → 10/04 退房 · 5 晚 · Barmy Badger 已订<br>剑桥、白崖均当天往返，行李留在伦敦。' },
   { id: 'cambridge', label: '剑桥', symbol: '剑', color: '#39756c', detail: '10/01 当天往返<br>伦敦 King’s Cross ⇄ Cambridge，晚上回伦敦。' },
   { id: 'seaford', label: 'Seaford · 白崖', symbol: '崖', color: '#a67512', detail: '10/03 白崖当天往返<br>伦敦 → Lewes 换乘 → Seaford<br>转公交 12 到 Exceat / Seven Sisters Park Centre，再经桥到西岸小屋，原路返程。' },
-  { id: 'edinburgh', label: '爱丁堡', symbol: '爱', color: '#10243e', detail: '10/04 入住 → 10/07 退房 · 3 晚<br>10/07 前往 EDI 机场返程。' },
+  { id: 'edinburgh', label: '爱丁堡', symbol: '爱', color: '#10243e', detail: '10/04 入住 → 10/07 退房 · 3 晚 · Castle Rock 已订<br>10/07 前往 EDI 机场返程。' },
 ];
 
 const mapLink = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
@@ -178,8 +179,8 @@ export function RouteMap() {
         <aside className="trip-route-summary" aria-label="住宿基地与往返支线">
           <div className="trip-base-card">
             <span className="trip-base-symbol">伦</span>
-            <div><strong>伦敦 · 5 晚</strong><span>09/29 入住 → 10/04 退房</span><small>两次出游都回同一住宿，轻装往返。</small></div>
-            <a href={mapLink('London UK')} target="_blank" rel="noreferrer" aria-label="在 Google Maps 查看伦敦"><ExternalLink /></a>
+            <div><strong>伦敦 · 5 晚</strong><span>09/29 入住 → 10/04 退房</span><small>{londonStay.name} · 已订<br />Earl’s Court；两次出游都回这里。</small></div>
+            <a href={mapLink(londonStay.query)} target="_blank" rel="noreferrer" aria-label="在 Google Maps 查看 Barmy Badger"><ExternalLink /></a>
           </div>
           <div className="trip-excursions">
             <article className="trip-branch trip-branch-cambridge">
@@ -196,8 +197,8 @@ export function RouteMap() {
           <div className="trip-northbound"><TrainFront /><div><strong>10/04 · 伦敦 → 爱丁堡</strong><span>工程绕行：Newcastle → Carlisle → Edinburgh。此日留足交通时间。</span><a href="https://www.nationalrail.co.uk/engineering-works/ncl-3-oct-20261003/" target="_blank" rel="noreferrer">查看官方工程公告 <ExternalLink /></a></div></div>
           <div className="trip-base-card trip-base-edinburgh">
             <span className="trip-base-symbol">爱</span>
-            <div><strong>爱丁堡 · 3 晚</strong><span>10/04 入住 → 10/07 退房</span><small>10/07 从 EDI 机场返程。</small></div>
-            <a href={mapLink('Edinburgh Waverley Station')} target="_blank" rel="noreferrer" aria-label="在 Google Maps 查看爱丁堡韦弗利站"><ExternalLink /></a>
+            <div><strong>爱丁堡 · 3 晚</strong><span>10/04 入住 → 10/07 退房</span><small>{edinburghStay.name} · 已订<br />城堡脚下；10/07 从 EDI 机场返程。</small></div>
+            <a href={mapLink(edinburghStay.query)} target="_blank" rel="noreferrer" aria-label="在 Google Maps 查看 Castle Rock Hostel"><ExternalLink /></a>
           </div>
         </aside>
       </div>

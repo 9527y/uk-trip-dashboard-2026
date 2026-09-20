@@ -2,12 +2,28 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { days } from '../lib/itinerary.ts';
 import { taskSeed, taskSections, prepStages, trainSeed, restoreTasks, restoreTrains, railSearchUrl, isValidTrainTime, TRIP_END } from '../lib/trip-plan.ts';
+import { getNightStay } from '../lib/stays.ts';
 
-test('旧版准备状态保留适用项，不把旧路线的购票和住宿状态带入新版', () => {
-  const restored = restoreTasks({ insurance: true, visa: false, 'stay-london': true, 'train-lon-oxf': true, trains: true, 'stay-london-5n': 'true' });
+test('当晚住宿按英国当地日期切换，日游仍回伦敦，退房返程日不显示青旅', () => {
+  assert.deepEqual(days.map((day) => {
+    const overnight = getNightStay(day.start);
+    return overnight ? [overnight.stay.id, overnight.night] : null;
+  }), [
+    ['barmy-badger', 1], ['barmy-badger', 2], ['barmy-badger', 3], ['barmy-badger', 4], ['barmy-badger', 5],
+    ['castle-rock', 1], ['castle-rock', 2], ['castle-rock', 3], null,
+  ]);
+  assert.equal(getNightStay('2026-09-28T23:05:00+08:00'), null);
+  assert.equal(getNightStay('2026-10-08T15:20:00+08:00'), null);
+});
+
+test('保留其他准备状态，旧住宿待办不覆盖新确认的预订，之后的手动修改仍能保存', () => {
+  const restored = restoreTasks({ insurance: true, visa: false, 'stay-london': true, 'train-lon-oxf': true, trains: true, 'stay-london-5n': false, 'stay-edinburgh': false });
   assert.equal(restored.insurance, true);
   assert.equal(restored.visa, false);
-  assert.equal(restored['stay-london-5n'], false);
+  assert.equal(restored['stay-london-5n'], undefined);
+  assert.equal(restored['stay-london-booked'], true);
+  assert.equal(restored['stay-edinburgh-booked'], true);
+  assert.equal(restoreTasks({ 'stay-london-booked': false })['stay-london-booked'], false);
   assert.equal(restored['train-london-edinburgh'], false);
   assert.equal(restored['train-cambridge-return'], false);
   assert.equal(restored['train-seaford-return'], false);

@@ -343,6 +343,12 @@ body::before {
 .day-header { display: flex; align-items: start; justify-content: space-between; gap: 16px; }
 .day-date { margin: 0 0 5px; color: #e84632; font-size: 13px; font-weight: 790; letter-spacing: .04em; text-transform: uppercase; }
 .day-header h3 { margin: 0; font-size: 23px; letter-spacing: -.035em; }
+.day-stay { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin: 14px 0; padding: 12px; border-radius: 10px; background: #eef4ee; }
+.day-stay > svg { width: 19px; height: 19px; flex: 0 0 auto; color: #39756c; }
+.day-stay > div { display: grid; gap: 3px; flex: 1 1 180px; min-width: 0; }
+.day-stay > div > span { font-size: 12px; color: #526858; }
+.day-stay > div > strong { font-size: 14px; color: #10243e; overflow-wrap: anywhere; }
+.day-stay > a { flex: 0 0 auto; }
 .state-badge { padding: 6px 10px; border-radius: 999px; background: #edf1ed; color: #77837c; font-size: 12px; font-weight: 760; }
 .state-badge.current { background: #ffe5df; color: #bd2f25; }
 .state-badge.past { background: #dcece8; color: #2f6c63; }

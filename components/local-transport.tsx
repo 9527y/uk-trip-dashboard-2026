@@ -26,18 +26,18 @@ export function LocalTransport() {
         </article>
         <article className="connection-card">
           <div className="connection-label"><Plane /><span>9/29 · 希思罗机场进城</span></div>
-          <h3>Heathrow → 伦敦住宿</h3>
-          <p><TrainFront /><strong>Elizabeth line：</strong>按到达航站楼进站，优先选适合住宿位置的 Paddington／Bond Street／Tottenham Court Road 等站，再步行或换乘。</p>
-          <p><TrainFront /><strong>Piccadilly line：</strong>住宿在沿线时可比较，通常更慢。以 TfL 当天规划结果核对时间、票价和换乘。</p>
+          <h3>Heathrow → Barmy Badger</h3>
+          <p><TrainFront /><strong>Piccadilly line：</strong>从到达航站楼出发，乘往伦敦市区方向的车到 Earl’s Court，再步行到 17 Longridge Road。正常运营下无需换乘地铁。</p>
+          <p>同一住宿去 King’s Cross 可乘 Piccadilly line，去 Victoria 可乘 District line。出发前用 TfL 核对当天线路和工程。</p>
           <p><CircleAlert />07:55 为航班计划落地时间，入境和进城另留余量；到住宿先寄存行李，房间能否提前入住以酒店为准。</p>
-          <div className="connection-actions"><a href="https://tfl.gov.uk/plan-a-journey/" target="_blank" rel="noreferrer">TfL 规划进城路线 <ExternalLink /></a><a href="https://www.heathrow.com/transport-and-directions/by-rail-or-train/elizabeth-line" target="_blank" rel="noreferrer">机场交通说明 <ExternalLink /></a></div>
+          <div className="connection-actions"><a href="https://tfl.gov.uk/plan-a-journey/" target="_blank" rel="noreferrer">TfL 规划进城路线 <ExternalLink /></a><a href="https://www.barmybadger.com/earls-court-hostel" target="_blank" rel="noreferrer">青旅到达指引 <ExternalLink /></a></div>
         </article>
         <article className="connection-card">
           <div className="connection-label"><Plane /><span>10/7 · 爱丁堡去机场</span></div>
           <h3>目标 09:45 到 EDI · 12:50 起飞</h3>
-          <p><TrainFront /><strong>机场电车：</strong>St Andrew Square／Princes Street／Haymarket 等站往 Airport。市中心站到机场约 35 分钟，另加酒店步行和等车。</p>
-          <p><BusFront /><strong>Airlink 100：</strong>Waverley Bridge 上车往 Edinburgh Airport，车程按约 40–50 分钟预留，再加候车及步行时间。</p>
-          <p><CircleAlert />建议 08:30–08:45 离开住宿；实际按住宿地址、航司通知和实时交通倒推。两种交通选一种即可，机场区间需对应车票。</p>
+          <p><TrainFront /><strong>机场电车：</strong>从 Castle Rock 步行到 Princes Street 站，乘 Airport 方向。市中心站到机场按约 35 分钟规划，另加步行和等车。</p>
+          <p><BusFront /><strong>Airlink 100：</strong>从 Castle Rock 步行到 Waverley Bridge，上车往 Edinburgh Airport。车程按约 40–50 分钟预留，再加候车及步行。</p>
+          <p><CircleAlert />暂按 08:15–08:30 从 Castle Rock 出门，包含老城步行接驳余量；实际按航司通知和当天交通倒推。两种交通选一种即可，机场区间需对应车票。</p>
           <div className="connection-actions"><a href="https://edinburghtrams.com/plan-journey/airport" target="_blank" rel="noreferrer">电车时刻与机场票 <ExternalLink /></a><a href="https://www.lothianbuses.com/our-services/airport-buses/" target="_blank" rel="noreferrer">Airlink 100 官网 <ExternalLink /></a><a href={mapUrl('Waverley Bridge Airlink 100 Edinburgh')} target="_blank" rel="noreferrer"><Navigation />公交上车点</a></div>
         </article>
         <article className="connection-card">
@@ -49,7 +49,7 @@ export function LocalTransport() {
           <div className="connection-actions"><a href="https://tfl.gov.uk/fares/how-to-pay-and-where-to-buy-tickets-and-oyster/pay-as-you-go/contactless-and-mobile-pay-as-you-go" target="_blank" rel="noreferrer">伦敦刷卡说明 <ExternalLink /></a><a href={transportSources.river} target="_blank" rel="noreferrer">Cuckmere 河口提示 <ExternalLink /></a></div>
         </article>
       </div>
-      <p className="source-note">交通线路和运营商入口于 2026-09-19 核对。车程为规划估算；公交班次、候车时间和票价以所选日期及当天公告为准。</p>
+      <p className="source-note">交通入口于 2026-09-19 核对，9/20 按已订青旅更新接驳。车程为规划估算；公交班次、候车时间和票价以所选日期及当天公告为准。</p>
     </section>
   );
 }
