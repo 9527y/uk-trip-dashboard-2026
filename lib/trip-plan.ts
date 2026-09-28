@@ -92,7 +92,8 @@ export const taskSeed: TaskItem[] = [
   { id: 'white-cliffs-plan', label: '确认七姐妹白崖 Seven Sisters 短线与返程公交', detail: '查风雨、9/27 起公交新表和末班；选择观景短线', group: '城外出行', action: '查公交', href: transportSources.coaster, done: false },
   { id: 'westminster-abbey', label: '决定是否预约威斯敏斯特教堂 Westminster Abbey', detail: '09/30 下午可选；不入内也可沿公园与河岸散步', group: '景点安排', action: '官网查看', href: 'https://www.westminster-abbey.org/visit-us', done: false },
   { id: 'cambridge-college', label: '确认 10/1 国王学院 King’s College, Cambridge 开放与门票', detail: '只选一所学院；撑篙看天气，不把多个学院排满', group: '景点安排', action: '官网查看', href: 'https://www.kings.cam.ac.uk/visit-kings', done: false },
-  { id: 'museum-oct2', label: '预约 10/2 大英博物馆 British Museum 免费时段', detail: '建议上午；若与白崖调换日期，同步调整预约', group: '景点安排', action: '官网预约', href: 'https://www.britishmuseum.org/visit', done: false },
+  { id: 'wimbledon-museum', label: '预约 10/2 温布尔登 Wimbledon Museum 轻量参观', detail: '建议约 10:00；Museum 成人 £20，含约 15 分钟中央球场短访，总留 1–1.5 小时；尚未购票，不选 90 分钟导览', group: '景点安排', action: '官网预约', href: 'https://bookings.wimbledon.com/stadiumtours/booking/museum.htm', done: false },
+  { id: 'museum-oct2', label: '预约 10/2 大英博物馆 British Museum 下午免费时段', detail: '建议约 14:00；如已约上午，先确认改约；与白崖换日期时也同步检查温网预约', group: '景点安排', action: '官网预约', href: 'https://www.britishmuseum.org/visit', done: false },
   { id: 'edinburgh-castle', label: '预约爱丁堡城堡 Edinburgh Castle', detail: '10/05 上午；按实际预约时间入场', group: '景点安排', action: '官网预约', href: 'https://www.edinburghcastle.scot/plan-your-visit/tickets', done: false },
   { id: 'leave-dates', label: '请假：9/29、9/30、10/8', detail: '北京时间共 3 天；9/28 下班赴港，10/9 上班、10/10 补班', group: '出发准备', done: false },
   { id: 'insurance', label: '购买旅行保险', detail: '核对医疗、延误和行李保障范围', group: '出发准备', done: false },
@@ -114,12 +115,12 @@ export const taskSeed: TaskItem[] = [
 export const taskSections = [
   { title: '已确认', ids: ['flight', 'visa', 'stay-london-booked', 'stay-edinburgh-booked'] },
   { title: '先锁定北上交通', ids: ['train-london-edinburgh'] },
-  { title: '两次当天往返与景点安排', ids: ['train-cambridge-return', 'train-seaford-return', 'white-cliffs-plan', 'westminster-abbey', 'cambridge-college', 'museum-oct2', 'edinburgh-castle'] },
+  { title: '两次当天往返与景点安排', ids: ['train-cambridge-return', 'train-seaford-return', 'white-cliffs-plan', 'westminster-abbey', 'cambridge-college', 'wimbledon-museum', 'museum-oct2', 'edinburgh-castle'] },
   { title: '轻装与出发准备', ids: ['leave-dates', 'insurance', 'card-first-payment', 'data-plan', 'bags', 'pack-shell', 'pack-warm', 'pack-clothes', 'pack-shoes', 'pack-tools', 'weather-coast', 'airport', 'edi-airport', 'offline-v2', 'checkin'] },
 ];
 
 export const prepStages = [
-  { end: new Date('2026-09-23T00:00:00+08:00').getTime(), range: '现在–9/22', title: '锁定北上交通', summary: '两地 8 晚青旅已订；接着确认施工日的北上车票与景点预约。', taskIds: ['train-london-edinburgh', 'leave-dates', 'train-cambridge-return', 'cambridge-college', 'museum-oct2', 'edinburgh-castle'] },
+  { end: new Date('2026-09-23T00:00:00+08:00').getTime(), range: '现在–9/22', title: '锁定北上交通', summary: '两地 8 晚青旅已订；接着确认施工日的北上车票与景点预约。', taskIds: ['train-london-edinburgh', 'leave-dates', 'train-cambridge-return', 'cambridge-college', 'wimbledon-museum', 'museum-oct2', 'edinburgh-castle'] },
   { end: new Date('2026-09-27T00:00:00+08:00').getTime(), range: '9/23–9/26', title: '补齐出行与装备', summary: '复核公交、天气、上网和机场交通，白崖按短线准备。', taskIds: ['train-seaford-return', 'white-cliffs-plan', 'insurance', 'card-first-payment', 'data-plan', 'bags', 'pack-shell', 'pack-warm', 'pack-clothes', 'pack-shoes', 'pack-tools', 'weather-coast', 'airport', 'edi-airport'] },
   { end: TRIP_START, range: '9/27–9/28', title: '值机与出发', summary: '保存票券，按起飞时间倒推赴港和到机场的时间。', taskIds: ['checkin', 'offline-v2', 'bags', 'airport', 'weather-coast'] },
 ];

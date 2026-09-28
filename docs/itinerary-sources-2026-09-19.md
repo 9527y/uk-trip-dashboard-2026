@@ -1,12 +1,12 @@
 # 每日行程与餐饮核验记录
 
-核验日期：2026-09-19。对应 `lib/itinerary.ts`。
+核验日期：2026-09-19；温布尔登与 10/2 顺序补充于 2026-09-28。对应 `lib/itinerary.ts`。
 
 ## 行程边界
 
 - 采用本次对话已确认的机票：9 月 29 日 07:55 抵达 Heathrow；10 月 7 日 12:50 从 Edinburgh 起飞，10 月 8 日 15:20 抵达香港。英国境内用当地时间，香港用北京时间。
 - 伦敦 9/29–10/4 连住 5 晚；爱丁堡 10/4–10/7 连住 3 晚。剑桥与白崖均为伦敦当天往返。
-- 9/30 西区；10/1 剑桥；10/2 大英博物馆；10/3 七姐妹西岸短线；10/4 全日北上；10/5 老城；10/6 天气合适登山、国家博物馆；10/7 返程。
+- 9/30 西区；10/1 剑桥；10/2 上午温布尔登轻量参观、中午 Speedy’s 外景、下午大英博物馆；10/3 七姐妹西岸短线；10/4 全日北上；10/5 老城；10/6 天气合适登山、国家博物馆；10/7 返程。
 - 所有火车时间、餐馆用餐时间、景点入场时段都是建议，不表示已经购买或获得席位。
 - 所有餐费是**每人每餐的个人规划预算**，不是核实后的菜单价格，也不承诺涵盖酒水、服务费或所有点餐组合。
 
@@ -36,7 +36,9 @@
 
 - [King’s College 官方来访页](https://www.kings.cam.ac.uk/visit-kings) 及 [官方票务入口](https://shop.kings.cam.ac.uk/pages/visiting-kings-college-chapel)：建议提前购票，不能保证当天有票。没有把某个固定入场时段写成已确认。
 - [Westminster Abbey 来访说明](https://www.westminster-abbey.org/visit-us/plan-your-visit)：工作教堂会因礼拜调整开放，下午需选择较早的可订时段。换岗不沿用“单数日一定有”的旧说法。
-- [British Museum 官方来访页](https://www.britishmuseum.org/visit)：建议提前预约免费时段；本版将参观移到 10/2 上午。
+- [Wimbledon Museum 官方票务](https://bookings.wimbledon.com/stadiumtours/booking/museum.htm) 与 [Museum & Tours FAQ](https://www.wimbledon.com/en_GB/museum_and_tours/Museum_and_Tours_FAQs)：2026-09-28 查询 Museum 成人 £20，含约 15 分钟 Centre Court 短访，所有参观须提前预约；10–3 月常规开放 10:00–17:00，最后入馆 16:00。按用户“逛一圈”选择 Museum 轻量参观，规划总留 1–1.5 小时，不选 90 分钟 Museum & Tour；没有购票，也没有核验 10/2 10:00 余票，不包含比赛或打球。
+- [Wimbledon 官方到达指南](https://www.wimbledon.com/en_GB/visit/getting_here.html)：Museum 经 Church Road 的 Gate 4 入场，邮编 SW19 5AG；Southfields 为 District line 车站，步行约 15 分钟到场馆。酒店经 Earl’s Court 到场馆按 45–60 分钟、场馆回 Speedy’s／Bloomsbury 按 60–75 分钟留量，均为含步行与等车的规划估计，非实时查得的班次时长。
+- [British Museum 官方来访页](https://www.britishmuseum.org/visit) 与 [周五晚开](https://www.britishmuseum.org/visit/late-opening-on-fridays)：建议提前预约免费时段；10/2 已改为约 14:00–17:00。周五常规开放到 20:30，部分展厅不参加晚开且可临时关闭，仅作行程缓冲；用户若已有上午预约，必须先确认改约，不能把新建议当成订单变更。
 - [Seven Sisters 官方步行页](https://www.sevensisters.org.uk/things-to-do/walking/)：游客中心到 Coastguard Cottages 约 2.4 公里、单程约 40 分钟；到 Birling Gap 单程约 5.6 公里、2–3 小时。因此只把西岸小屋往返作为当前主线，另留拍照休息，不把 Birling Gap 当成同一段短线。
 - 河口没有通向对岸的行人桥，西岸小屋线路经北侧 Exceat Bridge 到河西岸后向南走，原路返回，不涉水跨河口。
 - [National Museum of Scotland 官方来访页](https://www.nms.ac.uk/national-museum-of-scotland/plan-your-visit)：通常每日 10:00–17:00，常设展免费；放在 10/6 下午，雨天可提前到上午。
