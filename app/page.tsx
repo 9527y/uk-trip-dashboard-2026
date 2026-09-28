@@ -355,7 +355,7 @@ export default function Home() {
           <div className="hero-copy">
             <p className="eyebrow"><Plane aria-hidden="true" /> 已确认 · Economy Light</p>
             <h2 id="trip-title">两处基地<br />慢慢看英国</h2>
-            <p className="route-line">伦敦 5 晚 <ArrowRight /> 爱丁堡 3 晚</p><p className="hero-itinerary">10/1 剑桥当天往返 · 10/3 白崖短线当天往返</p><p className="hero-revision">2026-09-28 更新 · 地点中英对照 · 两家青旅已订 · 英国行程 9/29–10/7</p>
+            <p className="route-line">伦敦 5 晚 <ArrowRight /> 爱丁堡 3 晚</p><p className="hero-itinerary">10/1 剑桥当天往返 · 10/3 白崖短线当天往返</p><p className="hero-revision">2026-09-28 更新 · 中英地名与影视打卡 · 两家青旅已订 · 英国行程 9/29–10/7</p>
             <div className="hero-actions"><a className="primary-action" href="#now">返回当前安排 <ChevronRight /></a><a className="secondary-action" href="#map">打开行程地图</a></div>
           </div>
           <figure className="hero-photo" aria-label="爱丁堡 Edinburgh 城堡与城市天际线">

@@ -24,6 +24,10 @@ const londonNames = [
   ['塔桥', 'Tower Bridge', 'Tower Bridge London'],
   ['海斯拱廊', "Hay's Galleria", "Hay's Galleria London"],
   ['博罗市场', 'Borough Market', 'Borough Market London'],
+  ['破釜酒吧外景门口', 'The Leaky Cauldron filming location', '7 Stoney Street London'],
+  ['皮卡迪利广场', 'Piccadilly Circus', 'Piccadilly Circus London'],
+  ['国王十字车站 9¾ 站台推车打卡点', 'Platform 9¾', 'Harry Potter Platform 9 3/4 Kings Cross London'],
+  ['Speedy’s 咖啡馆与旁边公寓门口', 'Speedy’s Sandwich Bar & Cafe', 'Speedys Sandwich Bar Cafe 187 North Gower Street London NW1 2NJ'],
 ] as const;
 
 export function PlaceReference() {
