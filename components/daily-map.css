@@ -1,0 +1,68 @@
+.daily-map-section { scroll-margin-top: 85px; }
+.day-card[id] { scroll-margin-top: 85px; }
+.daily-map-overview-link, .daily-map-footer > a { display: inline-flex; align-items: center; gap: 5px; color: #39756c; font-size: 14px; font-weight: 750; }
+.daily-map-overview-link svg, .daily-map-footer svg { width: 16px; height: 16px; }
+.daily-map-tab-scroll { overflow-x: auto; padding: 3px 2px 10px; }
+.daily-map-section .daily-map-date-list { display: grid; grid-template-columns: repeat(9, minmax(96px, 1fr)); width: 100%; height: auto; min-width: 910px; padding: 5px; gap: 4px; background: #e8efe9; border: 1px solid #d3dad5; border-radius: 16px; }
+.daily-map-section .daily-map-date { display: flex; flex-direction: column; gap: 5px; height: auto; min-height: 76px; padding: 10px 5px; font-size: 14px; color: #536276; border-radius: 11px; white-space: normal; }
+.daily-map-date > span { font-size: 14px; }
+.daily-map-date > strong { font-size: 14px; line-height: 1.3; }
+.daily-map-section .daily-map-date[data-active] { background: #10243e; color: #fff; box-shadow: 0 3px 9px rgb(16 36 62 / 15%); }
+.daily-map-panel { padding-top: 8px; }
+.daily-map-heading { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 17px; }
+.daily-map-heading p { margin: 0 0 5px; color: #6c7882; font-size: 14px; }
+.daily-map-heading h3 { margin: 0; font-size: 21px; line-height: 1.5; }
+.daily-map-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.daily-map-scope { display: flex; border: 1px solid #c8d0c9; border-radius: 10px; padding: 3px; background: #fff; }
+.daily-map-scope button { border: 0; padding: 7px 10px; border-radius: 7px; background: transparent; color: #637080; cursor: pointer; font-size: 14px; font-weight: 650; }
+.daily-map-scope button[aria-pressed="true"] { color: #fff; background: #39756c; }
+.daily-map-layout { display: grid; grid-template-columns: minmax(0, 1fr) 345px; overflow: hidden; border: 1px solid #d3dad5; border-radius: 18px; background: #fff; }
+.daily-map-canvas-wrap { position: relative; isolation: isolate; min-width: 0; background: #e8efe9; }
+.daily-map-canvas { min-height: 480px; height: 100%; width: 100%; }
+.daily-map-canvas-caption { position: absolute; z-index: 450; left: 13px; bottom: 27px; max-width: calc(100% - 26px); padding: 7px 10px; border: 1px solid #d3dad5; border-radius: 8px; background: rgb(255 255 255 / 94%); color: #536276; font-size: 12px; pointer-events: none; }
+.daily-map-marker { background: none; border: 0; }
+.daily-map-marker > span { display: grid; place-items: center; width: 34px; height: 34px; border: 3px solid #fff; border-radius: 50%; color: #fff; box-shadow: 0 3px 9px rgb(16 36 62 / 28%); font-family: inherit; font-size: 14px; font-weight: 800; }
+.daily-map-marker.is-selected > span { outline: 3px solid #f3c846; transform: scale(1.12); }
+.daily-map-marker:focus-visible { outline: 3px solid #e84632; outline-offset: 4px; border-radius: 50%; }
+.daily-map-status { position: absolute; z-index: 500; inset: 0; display: grid; place-items: center; padding: 30px; color: #536276; font-size: 16px; background: #edf3f1; }
+.daily-map-tile-notice { position: absolute; z-index: 500; left: 55px; right: 12px; top: 12px; margin: 0; padding: 8px; border-radius: 8px; background: #fff8e8; color: #745c2c; font-size: 13px; }
+.daily-map-stop-panel { min-width: 0; max-height: 480px; overflow-y: auto; border-left: 1px solid #d3dad5; }
+.daily-map-stop-list { margin: 0; padding: 8px; list-style: none; }
+.daily-map-stop-list li + li { border-top: 1px solid #edf0ec; }
+.daily-map-stop { display: grid; grid-template-columns: 29px minmax(0, 1fr) 29px; align-items: center; gap: 9px; width: 100%; padding: 13px 8px; border: 0; border-radius: 9px; background: #fff; text-align: left; cursor: pointer; }
+.daily-map-stop:hover, .daily-map-stop[aria-pressed="true"] { background: #edf3f1; }
+.daily-map-number { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: #fff; font-size: 13px; font-weight: 800; }
+.daily-map-stop strong { display: block; font-size: 15px; line-height: 1.45; color: #10243e; }
+.daily-map-stop small { display: block; margin-top: 3px; font-size: 12px; color: #6c7882; line-height: 1.4; overflow-wrap: anywhere; }
+.daily-map-kind { font-size: 12px; color: #6c7882; }
+.daily-map-footer { display: flex; justify-content: space-between; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 12px; }
+.daily-map-key { display: flex; gap: 16px; flex-wrap: wrap; color: #536276; font-size: 13px; }
+.daily-map-key span { display: flex; align-items: center; gap: 6px; }
+.daily-map-key i { width: 10px; height: 10px; border-radius: 50%; }
+.daily-map-detail { display: flex; align-items: flex-start; gap: 12px; padding: 17px 19px; margin-top: 16px; background: #fff; border: 1px solid #d3dad5; border-radius: 12px; }
+.daily-map-detail > svg { flex: 0 0 21px; width: 21px; height: 21px; margin-top: 3px; color: #e84632; }
+.daily-map-detail > div { flex: 1; min-width: 0; }
+.daily-map-detail strong { font-size: 16px; line-height: 1.6; }
+.daily-map-detail p { margin: 5px 0 0; color: #536276; font-size: 14px; line-height: 1.7; }
+.daily-map-detail > a { display: inline-flex; align-items: center; gap: 5px; flex-shrink: 0; margin-top: 3px; color: #39756c; font-size: 14px; font-weight: 750; }
+.daily-map-detail > a svg { width: 16px; height: 16px; }
+.daily-map-day-note { margin: 15px 0 0; font-size: 14px; color: #536276; line-height: 1.8; }
+.daily-map-location-note { margin: 5px 0 0; font-size: 12px; color: #6c7882; line-height: 1.8; }
+.daily-map-section button:focus-visible, .daily-map-section a:focus-visible { outline: 3px solid #e84632; outline-offset: 3px; }
+@media (max-width: 850px) {
+  .daily-map-heading { align-items: flex-start; flex-direction: column; }
+  .daily-map-layout { grid-template-columns: 1fr; }
+  .daily-map-canvas { height: 410px; min-height: 410px; }
+  .daily-map-stop-panel { max-height: 290px; border-left: 0; border-top: 1px solid #d3dad5; }
+  .daily-map-stop-list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 8px; }
+}
+@media (max-width: 550px) {
+  .daily-map-overview-link { font-size: 13px; }
+  .daily-map-heading h3 { font-size: 19px; }
+  .daily-map-section .daily-map-date-list { min-width: 870px; }
+  .daily-map-actions { width: 100%; justify-content: space-between; }
+  .daily-map-canvas { height: 360px; min-height: 360px; }
+  .daily-map-stop-list { display: block; }
+  .daily-map-detail { flex-wrap: wrap; padding: 15px; }
+  .daily-map-detail > a { margin-left: 33px; }
+}

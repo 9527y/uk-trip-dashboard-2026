@@ -32,6 +32,7 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Progress, ProgressLabel, ProgressValue } from '@/components/ui/progress';
 import { RouteMap } from '@/components/route-map';
+import { DailyMap } from '@/components/daily-map';
 
 import { days, foodInfoUrl, type Place, type TripDay } from '@/lib/itinerary';
 import {
@@ -293,7 +294,7 @@ export default function Home() {
     <main>
       <nav className="topbar" aria-label="页面导航">
         <a className="brand" href="#now" aria-label="返回当前安排"><span className="brand-mark">UK</span><span>Tripboard</span></a>
-        <div className="nav-links"><a href="#now">现在</a><a href="#todo">待办</a><a href="#stays">住宿</a><a href="#packing">穿衣</a><a href="#trains">火车</a><a href="#local-transport">公交</a><a href="#map">地图</a><a href="#place-names">地名</a><a href="#route">行程表</a><a href="#money">换汇</a></div>
+        <div className="nav-links"><a href="#now">现在</a><a href="#todo">待办</a><a href="#stays">住宿</a><a href="#packing">穿衣</a><a href="#trains">火车</a><a href="#local-transport">公交</a><a href="#daily-map">每日地图</a><a href="#map">全程</a><a href="#place-names">地名</a><a href="#route">行程表</a><a href="#money">换汇</a></div>
         <span className="date-chip">9/28–10/08</span>
       </nav>
 
@@ -433,6 +434,8 @@ export default function Home() {
           </div>
         </section>
 
+        <DailyMap />
+
         <section className="section map-section" id="map">
           <div className="section-heading"><div><p className="eyebrow"><MapPinned /> Route map</p><h2>伦敦往返，再北上</h2></div><span className="section-metric">2 处住宿 · 2 次日游</span></div>
           <p className="section-intro">剑桥和白崖分别从伦敦当天往返，10/4 再前往爱丁堡。连线仅示方向；施工绕行、精确车次和站台以运营商当天信息为准。</p>
@@ -492,11 +495,12 @@ export default function Home() {
               const end = new Date(day.end).getTime();
               const state = now >= start && now <= end ? 'current' : now > end ? 'past' : 'future';
               return (
-                <article className={`day-card ${state}`} key={day.date}>
+                <article className={`day-card ${state}`} key={day.date} id={`day-${day.date.replace('/', '-')}`}>
                   <div className="day-rail" aria-hidden="true"><span>{index + 1}</span></div>
                   <div className="day-body">
                     <header className="day-header"><div><p className="day-date">{day.date} · {day.weekday} · {day.city}</p><h3>{day.title}</h3></div><span className={`state-badge ${state}`}>{state === 'current' ? '今天' : state === 'past' ? '已过日期' : '计划'}</span></header>
                     <NightStay dayStart={day.start} />
+                    <a className="daily-map-overview-link" href={`#daily-map?day=${day.date}`}><MapPinned />查看这一天的地图</a>
                     <div className="day-practical">
                       <div><Shirt /><span><b>今天怎么穿</b>{day.wear}</span></div>
                       <div><CircleAlert /><span><b>今天别忘了</b>{day.mustDo}</span></div>
