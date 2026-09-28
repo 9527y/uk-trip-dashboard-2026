@@ -12,32 +12,32 @@ export function LocalTransport() {
       <p className="section-intro">白崖使用当地公交接驳，北上优先查铁路；长途大巴不作为默认行程。铁路查询如出现替代巴士，先确认上车位置和延长时间。</p>
       <div className="connection-grid">
         <article className="connection-card" id="white-cliffs-bus">
-          <div className="connection-label"><BusFront /><span>10/3 · 白崖去程与回程</span></div>
-          <h3>Seaford ↔ Seven Sisters Park Centre</h3>
+          <div className="connection-label"><BusFront /><span>10/3 · 七姐妹白崖 Seven Sisters 去程与回程</span></div>
+          <h3>锡福德 Seaford ↔ 七姐妹公园中心公交站 Seven Sisters Park Centre</h3>
           <ol>
-            <li>Seaford 火车站下车，步行到 <strong>Seaford Library</strong> 公交站。</li>
-            <li>去程选 <strong>12 路往 Eastbourne</strong>、停靠 Seven Sisters Park Centre／Exceat 的班次；上车前核对车头方向和停站。</li>
-            <li>公交短段约 15 分钟，不含步行和等车。下车后经 <strong>Exceat Bridge 到河西岸</strong>，步行去 Coastguard Cottages 看白崖。</li>
-            <li>回程按原路回到 Exceat，在往 <strong>Seaford／Brighton</strong> 方向的站点乘车，到 Seaford Library 下车，再步行去火车站。</li>
+            <li>在锡福德火车站 Seaford Railway Station 下车，步行到<strong>锡福德图书馆公交站 Seaford Library</strong>。</li>
+            <li>去程选 <strong>12 路往伊斯特本 Eastbourne</strong>、停靠七姐妹公园中心公交站 Seven Sisters Park Centre（埃克西特 Exceat 地区）的班次；上车前核对车头方向和停站。</li>
+            <li>公交短段约 15 分钟，不含步行和等车。下车后经 <strong>埃克西特桥 Exceat Bridge 到河西岸</strong>，步行去海岸警卫队小屋 Coastguard Cottages 看白崖。</li>
+            <li>回程按原路回到埃克西特 Exceat，在往<strong>锡福德 Seaford／布莱顿 Brighton</strong>方向的站点乘车，到锡福德图书馆公交站 Seaford Library 下车，再步行去火车站。</li>
           </ol>
           <p><Footprints />观景往返步行约 4.8 公里，含拍照休息留 2–3 小时。过河走桥，不涉水穿越河口。</p>
           <p><CircleAlert />9/27 起启用新版时刻表。12X 等班次须另核实停站；下午提前折返，别以末班车为目标。</p>
           <div className="connection-actions"><a href={transportSources.coaster} target="_blank" rel="noreferrer">公交时刻与票价 <ExternalLink /></a><a href={mapUrl('Seaford Library bus stop East Sussex')} target="_blank" rel="noreferrer"><Navigation />去上车点</a><a href={transportSources.walking} target="_blank" rel="noreferrer">官方步行路线 <ExternalLink /></a></div>
         </article>
         <article className="connection-card">
-          <div className="connection-label"><Plane /><span>9/29 · 希思罗机场进城</span></div>
-          <h3>Heathrow → Barmy Badger</h3>
-          <p><TrainFront /><strong>Piccadilly line：</strong>从到达航站楼出发，乘往伦敦市区方向的车到 Earl’s Court，再步行到 17 Longridge Road。正常运营下无需换乘地铁。</p>
-          <p>同一住宿去 King’s Cross 可乘 Piccadilly line，去 Victoria 可乘 District line。出发前用 TfL 核对当天线路和工程。</p>
+          <div className="connection-label"><Plane /><span>9/29 · 希思罗机场 Heathrow Airport 进城</span></div>
+          <h3>希思罗 Heathrow → 伦敦青旅 Barmy Badger Backpackers</h3>
+          <p><TrainFront /><strong>皮卡迪利线 Piccadilly line：</strong>从到达航站楼出发，乘往伦敦市区方向的车到伯爵宫地铁站 Earl’s Court，再步行到 17 Longridge Road。正常运营下无需换乘地铁。</p>
+          <p>去国王十字火车站 London King’s Cross，可乘皮卡迪利线 Piccadilly line 到国王十字圣潘克拉斯地铁站 King’s Cross St Pancras；去维多利亚火车站 London Victoria，可乘区域线 District line 到 Victoria 地铁站。维多利亚长途汽车站 Victoria Coach Station 是另一处地点。出发前用 TfL 核对当天线路和工程。</p>
           <p><CircleAlert />07:55 为航班计划落地时间，入境和进城另留余量；到住宿先寄存行李，房间能否提前入住以酒店为准。</p>
           <div className="connection-actions"><a href="https://tfl.gov.uk/plan-a-journey/" target="_blank" rel="noreferrer">TfL 规划进城路线 <ExternalLink /></a><a href="https://www.barmybadger.com/earls-court-hostel" target="_blank" rel="noreferrer">青旅到达指引 <ExternalLink /></a></div>
         </article>
         <article className="connection-card">
-          <div className="connection-label"><Plane /><span>10/7 · 爱丁堡去机场</span></div>
-          <h3>目标 09:45 到 EDI · 12:50 起飞</h3>
-          <p><TrainFront /><strong>机场电车：</strong>从 Castle Rock 步行到 Princes Street 站，乘 Airport 方向。市中心站到机场按约 35 分钟规划，另加步行和等车。</p>
-          <p><BusFront /><strong>Airlink 100：</strong>从 Castle Rock 步行到 Waverley Bridge，上车往 Edinburgh Airport。车程按约 40–50 分钟预留，再加候车及步行。</p>
-          <p><CircleAlert />暂按 08:15–08:30 从 Castle Rock 出门，包含老城步行接驳余量；实际按航司通知和当天交通倒推。两种交通选一种即可，机场区间需对应车票。</p>
+          <div className="connection-label"><Plane /><span>10/7 · 爱丁堡 Edinburgh 去机场</span></div>
+          <h3>目标 09:45 到爱丁堡机场 Edinburgh Airport（EDI）· 12:50 起飞</h3>
+          <p><TrainFront /><strong>机场电车：</strong>从城堡岩青旅 Castle Rock Hostel 步行到王子街电车站 Princes Street，乘机场方向 Airport。市中心站到机场按约 35 分钟规划，另加步行和等车。</p>
+          <p><BusFront /><strong>Airlink 100 机场巴士：</strong>从城堡岩青旅 Castle Rock Hostel 步行到威瓦利桥 Waverley Bridge，上车往爱丁堡机场 Edinburgh Airport。车程按约 40–50 分钟预留，再加候车及步行。</p>
+          <p><CircleAlert />暂按 08:15–08:30 从城堡岩青旅 Castle Rock Hostel 出门，包含老城步行接驳余量；实际按航司通知和当天交通倒推。两种交通选一种即可，机场区间需对应车票。</p>
           <div className="connection-actions"><a href="https://edinburghtrams.com/plan-journey/airport" target="_blank" rel="noreferrer">电车时刻与机场票 <ExternalLink /></a><a href="https://www.lothianbuses.com/our-services/airport-buses/" target="_blank" rel="noreferrer">Airlink 100 官网 <ExternalLink /></a><a href={mapUrl('Waverley Bridge Airlink 100 Edinburgh')} target="_blank" rel="noreferrer"><Navigation />公交上车点</a></div>
         </article>
         <article className="connection-card">
@@ -46,7 +46,7 @@ export function LocalTransport() {
           <p>伦敦连住 5 晚，剑桥和白崖当天往返；大包留住宿。10/4 才携带全部行李北上爱丁堡。</p>
           <p>优先刷银行卡：伦敦地铁进出站用同一张卡或同一设备，伦敦公交只在上车时刷卡。白崖 12 路若使用 Tap-on/Tap-off，则上下车都要刷同一张卡或设备。剑桥、白崖火车及爱丁堡交通按各运营商规则购票。</p>
           <p>白崖看天气再确定短线。若与 10/2 伦敦日互换，同步调整博物馆预约、两程火车和公交查询日期。</p>
-          <div className="connection-actions"><a href="https://tfl.gov.uk/fares/ways-to-pay/pay-as-you-go" target="_blank" rel="noreferrer">伦敦刷卡说明 <ExternalLink /></a><a href="https://www.buses.co.uk/contactless" target="_blank" rel="noreferrer">白崖公交刷卡说明 <ExternalLink /></a><a href={transportSources.river} target="_blank" rel="noreferrer">Cuckmere 河口提示 <ExternalLink /></a></div>
+          <div className="connection-actions"><a href="https://tfl.gov.uk/fares/ways-to-pay/pay-as-you-go" target="_blank" rel="noreferrer">伦敦刷卡说明 <ExternalLink /></a><a href="https://www.buses.co.uk/contactless" target="_blank" rel="noreferrer">白崖公交刷卡说明 <ExternalLink /></a><a href={transportSources.river} target="_blank" rel="noreferrer">卡克米尔河口 Cuckmere River Mouth 提示 <ExternalLink /></a></div>
         </article>
       </div>
       <p className="source-note">交通入口于 2026-09-19 核对，9/20 更新青旅接驳与刷卡说明。车程为规划估算；公交班次、候车时间和票价以所选日期及当天公告为准。</p>

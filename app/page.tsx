@@ -42,6 +42,7 @@ import {
 } from '@/lib/trip-plan';
 import { LocalTransport } from '@/components/local-transport';
 import { Accommodation } from '@/components/accommodation';
+import { PlaceReference } from '@/components/place-reference';
 import { getNightStay, stayNavigationUrl } from '@/lib/stays';
 
 function NightStay({ dayStart }: { dayStart: string }) {
@@ -93,6 +94,7 @@ function PlaceActions({ place, compact = false, menuHref }: { place: Place; comp
       <span className="place-name"><MapPin />{place.name}</span>
       <a className="navigation-action" href={navigationUrl(place)} target="_blank" rel="noreferrer" aria-label={`在地图查看并导航到 ${place.name}`}><Navigation />地图导航</a>
       {menuHref && <a className="menu-action" href={menuHref} target="_blank" rel="noreferrer" aria-label={`查看 ${place.name} 的菜单或营业信息`}><ForkKnife />菜单</a>}
+      <span className="place-search-name">地图搜索：<span lang="en">{place.query}</span></span>
     </div>
   );
 }
@@ -248,7 +250,7 @@ export default function Home() {
   const remainingTasks = taskSeed.filter((task) => !tasks[task.id]);
   const focusTasks = stageTasks.length ? stageTasks : remainingTasks;
   const focusSteps = outbound
-    ? ['提前抵达 HKG 并完成安检', '苏黎世转机 55 分钟，跟随转机指示快速前往登机口', '抵达 LHR 后乘 Piccadilly line 到 Earl’s Court，再步行到 Barmy Badger']
+    ? ['提前抵达香港国际机场 Hong Kong International Airport（HKG）并完成安检', '苏黎世机场 Zürich Airport（ZRH）转机 55 分钟，跟随转机指示快速前往登机口', '抵达希思罗机场 Heathrow Airport（LHR）后乘皮卡迪利线 Piccadilly line 到伯爵宫站 Earl’s Court，再步行到 Barmy Badger 青旅']
     : afterTrip
       ? ['确认所有消费记录', '整理照片和票据', '完成后续报销或旅行复盘']
       : [];
@@ -291,7 +293,7 @@ export default function Home() {
     <main>
       <nav className="topbar" aria-label="页面导航">
         <a className="brand" href="#now" aria-label="返回当前安排"><span className="brand-mark">UK</span><span>Tripboard</span></a>
-        <div className="nav-links"><a href="#now">现在</a><a href="#todo">待办</a><a href="#stays">住宿</a><a href="#packing">穿衣</a><a href="#trains">火车</a><a href="#local-transport">公交</a><a href="#map">地图</a><a href="#route">行程</a><a href="#money">换汇</a></div>
+        <div className="nav-links"><a href="#now">现在</a><a href="#todo">待办</a><a href="#stays">住宿</a><a href="#packing">穿衣</a><a href="#trains">火车</a><a href="#local-transport">公交</a><a href="#map">地图</a><a href="#place-names">地名</a><a href="#route">行程</a><a href="#money">换汇</a></div>
         <span className="date-chip">9/28–10/08</span>
       </nav>
 
@@ -353,11 +355,11 @@ export default function Home() {
           <div className="hero-copy">
             <p className="eyebrow"><Plane aria-hidden="true" /> 已确认 · Economy Light</p>
             <h2 id="trip-title">两处基地<br />慢慢看英国</h2>
-            <p className="route-line">伦敦 5 晚 <ArrowRight /> 爱丁堡 3 晚</p><p className="hero-itinerary">10/1 剑桥当天往返 · 10/3 白崖短线当天往返</p><p className="hero-revision">2026-09-20 更新 · 两家青旅已订 · 英国行程 9/29–10/7</p>
+            <p className="route-line">伦敦 5 晚 <ArrowRight /> 爱丁堡 3 晚</p><p className="hero-itinerary">10/1 剑桥当天往返 · 10/3 白崖短线当天往返</p><p className="hero-revision">2026-09-28 更新 · 地点中英对照 · 两家青旅已订 · 英国行程 9/29–10/7</p>
             <div className="hero-actions"><a className="primary-action" href="#now">返回当前安排 <ChevronRight /></a><a className="secondary-action" href="#map">打开行程地图</a></div>
           </div>
-          <figure className="hero-photo" aria-label="Edinburgh 城堡与城市天际线">
-            <div className="photo-overlay"><span className="photo-city">Edinburgh</span><span className="photo-note">最后三晚 · 10/04–10/07</span></div>
+          <figure className="hero-photo" aria-label="爱丁堡 Edinburgh 城堡与城市天际线">
+            <div className="photo-overlay"><span className="photo-city">爱丁堡 Edinburgh</span><span className="photo-note">最后三晚 · 10/04–10/07</span></div>
             <a className="photo-credit" href="https://unsplash.com/photos/a-city-with-a-castle-in-the-distance-H4S5hK3B-NQ" target="_blank" rel="noreferrer">Photo: Natalie Parham / Unsplash</a>
           </figure>
         </section>
@@ -419,12 +421,12 @@ export default function Home() {
           <div className="section-heading"><div><p className="eyebrow"><Shirt /> Light packing</p><h2>两个背包怎么装</h2></div><span className="section-metric">约 7–19°C · 防风雨优先</span></div>
           <p className="section-intro">不按九天准备九套衣服。采用“贴身层 + 保暖层 + 防风雨外层”，中途洗一次；每天具体穿法已经放进下方逐日行程。</p>
           <div className="packing-weather">
-            <div><CloudRain /><span><b>London</b>常年参考约 10–19°C，室内和地铁较暖，外套要方便脱。</span></div>
-            <div><Wind /><span><b>Edinburgh</b>常年参考约 7–17°C，城堡和山顶风大，体感会更低。</span></div>
+            <div><CloudRain /><span><b>伦敦 London</b>常年参考约 10–19°C，室内和地铁较暖，外套要方便脱。</span></div>
+            <div><Wind /><span><b>爱丁堡 Edinburgh</b>常年参考约 7–17°C，城堡和山顶风大，体感会更低。</span></div>
             <a href="https://weather.metoffice.gov.uk/" target="_blank" rel="noreferrer">9/22 后查看逐日天气 <ExternalLink /></a>
           </div>
           <div className="packing-grid">
-            <article><Umbrella /><h3>外层</h3><strong>防风防水连帽外套 ×1</strong><p>每天随身。比雨伞更适合 Edinburgh 的风。</p></article>
+            <article><Umbrella /><h3>外层</h3><strong>防风防水连帽外套 ×1</strong><p>每天随身。比雨伞更适合爱丁堡 Edinburgh 的风。</p></article>
             <article><Shirt /><h3>保暖与上衣</h3><strong>抓绒/薄毛衣 ×1，上衣 3–4 件</strong><p>怕冷再带可压缩薄羽绒；不带厚重大衣。</p></article>
             <article><Footprints /><h3>下装与鞋袜</h3><strong>长裤 ×2，内衣袜各 4 套</strong><p>只带一双防滑、耐走、略防水的鞋。</p></article>
             <article><Luggage /><h3>背包分工</h3><strong>主包放衣物，小包放证件与当天用品</strong><p>防水外套、充电线、护照和电子票放最容易拿的位置。</p></article>
@@ -436,6 +438,8 @@ export default function Home() {
           <p className="section-intro">剑桥和白崖分别从伦敦当天往返，10/4 再前往爱丁堡。连线仅示方向；施工绕行、精确车次和站台以运营商当天信息为准。</p>
           <RouteMap />
         </section>
+
+        <PlaceReference />
 
         <section className="section" id="trains">
           <div className="section-heading"><div><p className="eyebrow"><TrainFront /> Rail desk</p><h2>从购票到上车</h2></div><Button variant="ghost" onClick={resetTrainTimes}><RotateCcw /> 恢复暂定时间</Button></div>
@@ -449,7 +453,7 @@ export default function Home() {
             </ol>
             <a href="https://www.nationalrail.co.uk/journey-planner/" target="_blank" rel="noreferrer">打开 National Rail <ExternalLink /></a>
           </article>
-          <div className="rail-engineering-note"><CircleAlert /><div><strong>10/4 北上：施工绕行已公布</strong><p>Newcastle 至 Edinburgh 海岸线施工，LNER 经 Carlisle 绕行并增加时间。按实际查询留出整天转移，不沿用通常的 4.5 小时或固定海景座位建议。</p><a href={transportSources.engineering} target="_blank" rel="noreferrer">查看 National Rail 官方公告 <ExternalLink /></a></div></div>
+          <div className="rail-engineering-note"><CircleAlert /><div><strong>10/4 北上：施工绕行已公布</strong><p>纽卡斯尔 Newcastle 至爱丁堡 Edinburgh 海岸线施工，LNER 经卡莱尔 Carlisle 绕行并增加时间。按实际查询留出整天转移，不沿用通常的 4.5 小时或固定海景座位建议。</p><a href={transportSources.engineering} target="_blank" rel="noreferrer">查看 National Rail 官方公告 <ExternalLink /></a></div></div>
           <div className="rail-platform-note"><CircleAlert /><p><strong>站台号不能提前写死。</strong>英国车站会在临近发车时公布或调整站台；到站后按票面时间和终点找大屏，听广播，并用每张卡片里的“当天看站台”。</p></div>
           <div className="train-grid">
             {trains.map((train, index) => (

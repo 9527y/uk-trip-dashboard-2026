@@ -308,7 +308,7 @@ body::before {
 .station-flow > svg { width: 21px; color: #e84632; }
 .station-box { min-height: 122px; display: grid; align-content: start; gap: 5px; padding: 15px; border: 1px solid #d1d9d3; border-radius: 14px; background: rgb(255 255 255 / 78%); }
 .station-box > span { color: #e84632; font-size: 11px; font-weight: 820; letter-spacing: .06em; text-transform: uppercase; }
-.station-box strong { font-size: 16px; }
+.station-box strong { min-width: 0; font-size: 16px; overflow-wrap: anywhere; }
 .station-box strong b { margin-left: 4px; padding: 3px 5px; border-radius: 5px; background: #10243e; color: white; font-size: 11px; }
 .station-box small { color: #6c7883; font-size: 12px; }
 .station-box a { margin-top: 5px; display: inline-flex; align-items: center; gap: 5px; color: #39756c; font-size: 12px; font-weight: 760; }
@@ -415,8 +415,8 @@ body::before {
 .meal-summary-card a { margin-top: 17px; display: inline-flex; align-items: center; gap: 5px; color: #e84632; font-size: 12px; font-weight: 760; }
 .meal-summary-card a svg { width: 14px; height: 14px; }
 .place-actions { margin-top: 8px; display: flex !important; grid-template-columns: none !important; flex-wrap: wrap; align-items: center; gap: 6px !important; }
-.place-actions .place-name { margin-right: 2px; display: inline-flex; align-items: center; gap: 5px; color: #64727e; font-size: 13px; font-weight: 650; }
-.place-actions .place-name svg { width: 14px; height: 14px; color: #39756c; }
+.place-actions .place-name { min-width: 0; margin-right: 2px; display: inline-flex; align-items: center; gap: 5px; color: #64727e; font-size: 13px; font-weight: 650; overflow-wrap: anywhere; }
+.place-actions .place-name svg { width: 14px; height: 14px; color: #39756c; flex-shrink: 0; }
 .place-actions > a { min-height: 30px; margin: 0; padding: 0 9px; display: inline-flex; align-items: center; gap: 4px; border: 1px solid #ccd6cf; border-radius: 8px; background: white; color: #39756c; font-size: 13px; font-weight: 760; }
 .place-actions > a.navigation-action { border-color: #39756c; background: #39756c; color: white; }
 .place-actions > a.menu-action { border-color: #e5bb30; background: #f3c846; color: #10243e; }
@@ -426,6 +426,15 @@ body::before {
 .place-actions.is-compact { margin-top: 5px; gap: 5px !important; }
 .place-actions.is-compact .place-name { flex-basis: 100%; font-size: 12px; }
 .place-actions.is-compact > a { min-height: 27px; padding-inline: 7px; font-size: 12px; }
+.place-search-name { flex-basis: 100%; color: #687683; font-size: 12px; line-height: 1.5; overflow-wrap: anywhere; }
+.place-search-name > span { user-select: text; }
+.place-reference { padding: 20px; border: 1px solid #d8ded9; border-radius: 16px; background: #fff; }
+.place-reference > summary { cursor: pointer; font-weight: 750; }
+.place-reference-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 0 24px; margin-top: 16px; }
+.place-reference-grid article { min-width: 0; display: grid; gap: 5px; padding: 14px 0; border-top: 1px solid #e5eae6; }
+.place-reference-grid article > span { font-size: 14px; color: #536276; overflow-wrap: anywhere; }
+.place-reference-grid a { display: flex; align-items: baseline; gap: 6px; color: #39756c; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.place-reference-grid a svg { width: 13px; height: 13px; flex-shrink: 0; }
 .source-note { margin: 18px 0 0; color: #687683; font-size: 13px; line-height: 1.55; }
 
 footer { margin-top: 90px; padding: 30px 0 0; border-top: 1px solid #d5dbd6; display: flex; justify-content: space-between; align-items: center; color: #687683; }

@@ -28,72 +28,72 @@ export const transportSources = {
   river: 'https://www.sevensisters.org.uk/stay-safe-at-cuckmere-river-mouth/',
 };
 
-const kingsCross: RailStation = { name: "London King's Cross", code: 'KGX', address: 'Euston Road, London N1 9AL', query: "London King's Cross railway station" };
-const cambridge: RailStation = { name: 'Cambridge', code: 'CBG', address: 'Station Road, Cambridge CB1 2JW', query: 'Cambridge railway station Station Road' };
-const victoria: RailStation = { name: 'London Victoria', code: 'VIC', address: 'Victoria Street, London SW1V 1JU', query: 'London Victoria railway station' };
-const seaford: RailStation = { name: 'Seaford (Sussex)', code: 'SEF', address: 'Station Approach, Seaford BN25 2AR', query: 'Seaford railway station East Sussex' };
-const edinburgh: RailStation = { name: 'Edinburgh Waverley', code: 'EDB', address: 'Princes Street, Edinburgh EH1 1BB', query: 'Edinburgh Waverley railway station' };
+const kingsCross: RailStation = { name: "伦敦国王十字火车站 · London King's Cross", code: 'KGX', address: 'Euston Road, London N1 9AL', query: "London King's Cross railway station" };
+const cambridge: RailStation = { name: '剑桥火车站 · Cambridge', code: 'CBG', address: 'Station Road, Cambridge CB1 2JW', query: 'Cambridge railway station Station Road' };
+const victoria: RailStation = { name: '伦敦维多利亚火车站 · London Victoria', code: 'VIC', address: 'Victoria Street, London SW1V 1JU', query: 'London Victoria railway station' };
+const seaford: RailStation = { name: '锡福德火车站 · Seaford (Sussex)', code: 'SEF', address: 'Station Approach, Seaford BN25 2AR', query: 'Seaford railway station East Sussex' };
+const edinburgh: RailStation = { name: '爱丁堡威瓦利火车站 · Edinburgh Waverley', code: 'EDB', address: 'Princes Street, Edinburgh EH1 1BB', query: 'Edinburgh Waverley railway station' };
 
 export const trainSeed: TrainItem[] = [
   {
-    id: 'lon-cbg', taskId: 'train-cambridge-return', date: '10/01 周四 · 去程', route: "London King's Cross → Cambridge", local: '2026-10-01T08:30', note: '建议搜索 08:00–09:00；未确认班次', operator: 'Great Northern',
+    id: 'lon-cbg', taskId: 'train-cambridge-return', date: '10/01 周四 · 去程', route: "伦敦国王十字 London King's Cross → 剑桥 Cambridge", local: '2026-10-01T08:30', note: '建议搜索 08:00–09:00；未确认班次', operator: 'Great Northern',
     from: kingsCross, to: cambridge,
-    routePlan: '优先直达快车，常规约 50–70 分钟；下车后步行约 25–30 分钟到学院区。目的站选 Cambridge（CBG）。',
-    arrive: 'Barmy Badger 步行至 Earl’s Court，乘 Piccadilly line 到 King’s Cross；建议发车前 20–30 分钟到火车站，主行李留青旅。',
+    routePlan: '优先直达快车，常规约 50–70 分钟；下车后步行约 25–30 分钟到学院区。目的站选剑桥火车站 Cambridge（CBG）。',
+    arrive: '从伦敦青旅 Barmy Badger 步行至伯爵宫地铁站 Earl’s Court，乘皮卡迪利线 Piccadilly line 到国王十字圣潘克拉斯地铁站 King’s Cross St Pancras，再步行至国王十字火车站 London King’s Cross；建议发车前 20–30 分钟到火车站，主行李留青旅。',
     bookingUrl: railSearchUrl('KGX', 'CBG', '2026-10-01T08:30'), operatorUrl: transportSources.cambridge, liveUrl: 'https://www.nationalrail.co.uk/live-trains/departures/london-kings-cross/cambridge/',
   },
   {
-    id: 'cbg-lon', taskId: 'train-cambridge-return', date: '10/01 周四 · 回程', route: "Cambridge → London King's Cross", local: '2026-10-01T18:00', note: '建议搜索 17:30–19:00；未确认班次', operator: 'Great Northern',
+    id: 'cbg-lon', taskId: 'train-cambridge-return', date: '10/01 周四 · 回程', route: "剑桥 Cambridge → 伦敦国王十字 London King's Cross", local: '2026-10-01T18:00', note: '建议搜索 17:30–19:00；未确认班次', operator: 'Great Northern',
     from: cambridge, to: kingsCross,
     routePlan: '与去程一起比较 Return 往返票和两张 Single。票种可能限制运营商、时间或具体班次，不默认可任意改乘。',
     arrive: '从学院区返回车站另留约 30 分钟，发车前至少 15–20 分钟到站；晚餐可回伦敦后再吃。',
     bookingUrl: railSearchUrl('CBG', 'KGX', '2026-10-01T18:00'), operatorUrl: 'https://www.greatnorthernrail.com/', liveUrl: 'https://www.nationalrail.co.uk/live-trains/departures/cambridge/london-kings-cross/',
   },
   {
-    id: 'lon-sea', taskId: 'train-seaford-return', date: '10/03 周六 · 去程', route: 'London Victoria → Seaford · 经 Lewes', local: '2026-10-03T08:00', note: '建议搜索 07:30–08:30；看天气确认', operator: 'Southern',
+    id: 'lon-sea', taskId: 'train-seaford-return', date: '10/03 周六 · 去程', route: '伦敦维多利亚 London Victoria → 锡福德 Seaford · 经刘易斯 Lewes', local: '2026-10-03T08:00', note: '建议搜索 07:30–08:30；看天气确认', operator: 'Southern',
     from: victoria, to: seaford,
-    routePlan: '搜索 VIC → SEF，通常在 Lewes（LWS）换乘；站到站按约 1.5–2 小时估算。买覆盖全程的票，无需绕到 Brighton。',
-    arrive: 'Barmy Badger 步行至 Earl’s Court，乘 District line 到 Victoria。若选择 08:00 左右火车，目标 07:30 到火车站；出门前备好午餐、水和外套。',
+    routePlan: '搜索 VIC → SEF，通常在刘易斯 Lewes（LWS）换乘；站到站按约 1.5–2 小时估算。买覆盖全程的票，无需绕到布莱顿 Brighton。',
+    arrive: '从伦敦青旅 Barmy Badger 步行至伯爵宫地铁站 Earl’s Court，乘区域线 District line 到维多利亚地铁站 Victoria，再去同名火车站 London Victoria（非长途汽车站 Victoria Coach Station）。若选择 08:00 左右火车，目标 07:30 到火车站；出门前备好午餐、水和外套。',
     bookingUrl: railSearchUrl('VIC', 'SEF', '2026-10-03T08:00'), operatorUrl: transportSources.seaford, liveUrl: 'https://www.nationalrail.co.uk/live-trains/departures/london-victoria/lewes/',
   },
   {
-    id: 'sea-lon', taskId: 'train-seaford-return', date: '10/03 周六 · 回程', route: 'Seaford → London Victoria · 经 Lewes', local: '2026-10-03T17:00', note: '建议搜索 16:30–18:00；未确认班次', operator: 'Southern',
+    id: 'sea-lon', taskId: 'train-seaford-return', date: '10/03 周六 · 回程', route: '锡福德 Seaford → 伦敦维多利亚 London Victoria · 经刘易斯 Lewes', local: '2026-10-03T17:00', note: '建议搜索 16:30–18:00；未确认班次', operator: 'Southern',
     from: seaford, to: victoria,
-    routePlan: 'Seaford → Lewes 换乘 → London Victoria；先查回程票适用时段，再决定徒步折返点。全天交通与观景约 10–12 小时。',
+    routePlan: '锡福德 Seaford → 刘易斯 Lewes 换乘 → 伦敦维多利亚火车站 London Victoria；先查回程票适用时段，再决定徒步折返点。全天交通与观景约 10–12 小时。',
     arrive: '下午留足回公交站／火车站的时间；不以最后一班为目标，回伦敦后只安排晚餐和休息。',
     bookingUrl: railSearchUrl('SEF', 'VIC', '2026-10-03T17:00'), operatorUrl: 'https://www.southernrailway.com/', liveUrl: 'https://www.nationalrail.co.uk/live-trains/departures/seaford/lewes/',
   },
   {
-    id: 'lon-edi', taskId: 'train-london-edinburgh', date: '10/04 周日 · 换住宿', route: "London King's Cross → Edinburgh Waverley", local: '2026-10-04T09:30', note: '建议先查上午班次；全天用于转移', operator: 'LNER',
+    id: 'lon-edi', taskId: 'train-london-edinburgh', date: '10/04 周日 · 换住宿', route: "伦敦国王十字 London King's Cross → 爱丁堡威瓦利 Edinburgh Waverley", local: '2026-10-04T09:30', note: '建议先查上午班次；全天用于转移', operator: 'LNER',
     from: kingsCross, to: edinburgh,
-    routePlan: '10/3–4 Newcastle 至 Edinburgh 海岸线施工，LNER 经 Carlisle 绕行并延长旅程。时长、是否换乘和铁路替代巴士以当日查询为准。',
-    arrive: '从 Barmy Badger 退房，经 Earl’s Court 乘 Piccadilly line 到 King’s Cross，建议发车前 30 分钟到站。抵达后入住 Castle Rock，核对晚到安排。',
+    routePlan: '10/3–4 纽卡斯尔 Newcastle 至爱丁堡 Edinburgh 海岸线施工，LNER 经卡莱尔 Carlisle 绕行并延长旅程。时长、是否换乘和铁路替代巴士以当日查询为准。',
+    arrive: '从伦敦青旅 Barmy Badger 退房，经伯爵宫地铁站 Earl’s Court 乘皮卡迪利线 Piccadilly line 到国王十字圣潘克拉斯地铁站 King’s Cross St Pancras，再步行至国王十字火车站 London King’s Cross，建议发车前 30 分钟到站。抵达后入住城堡岩青旅 Castle Rock Hostel，核对晚到安排。',
     bookingUrl: railSearchUrl('KGX', 'EDB', '2026-10-04T09:30'), operatorUrl: 'https://www.lner.co.uk/', liveUrl: 'https://www.nationalrail.co.uk/live-trains/departures/london-kings-cross/edinburgh/',
   },
 ];
 
 export const milestones = [
   { label: '查看 SWISS 去程值机', time: new Date('2026-09-27T23:05:00+08:00').getTime(), note: '按航司 App 实际开放时间办理' },
-  { label: 'HKG 起飞', time: TRIP_START, note: '建议 9/28 20:00 前抵达机场' },
-  { label: '抵达 London Heathrow', time: new Date('2026-09-29T07:55:00+01:00').getTime(), note: '英国 07:55 · 北京时间 14:55' },
+  { label: '香港国际机场 Hong Kong International Airport（HKG）起飞', time: TRIP_START, note: '建议 9/28 20:00 前抵达机场' },
+  { label: '抵达伦敦希思罗机场 London Heathrow（LHR）', time: new Date('2026-09-29T07:55:00+01:00').getTime(), note: '英国 07:55 · 北京时间 14:55' },
   { label: '查看 Lufthansa 回程值机', time: new Date('2026-10-06T06:50:00+01:00').getTime(), note: '英国时间；以航司实际开放为准' },
-  { label: 'EDI 起飞', time: new Date('2026-10-07T12:50:00+01:00').getTime(), note: '目标 09:45 到机场，按航司通知调整' },
-  { label: '抵达 Hong Kong', time: TRIP_END, note: '10/08 15:20 北京时间，之后返回深圳' },
+  { label: '爱丁堡机场 Edinburgh Airport（EDI）起飞', time: new Date('2026-10-07T12:50:00+01:00').getTime(), note: '目标 09:45 到机场，按航司通知调整' },
+  { label: '抵达香港 Hong Kong', time: TRIP_END, note: '10/08 15:20 北京时间，之后返回深圳' },
 ];
 
 export const taskSeed: TaskItem[] = [
   { id: 'flight', label: '国际机票已确认', group: '已完成', done: true },
   { id: 'visa', label: '英国签证有效', group: '已完成', done: true },
-  { id: 'train-london-edinburgh', label: '确认 10/4 伦敦 → 爱丁堡车票', detail: '施工绕行；先核实实际时长和换乘，再订票', group: '优先处理', action: '搜索车次', href: trainSeed[4].bookingUrl, done: false },
-  { id: 'stay-london-booked', label: '已订 Barmy Badger · 伦敦 5 晚', detail: 'Hostelworld · 09/29 入住、10/04 退房', group: '已完成', action: '住宿信息', href: '#stays', done: true },
-  { id: 'stay-edinburgh-booked', label: '已订 Castle Rock · 爱丁堡 3 晚', detail: 'Hostelworld · 10/04 入住、10/07 退房', group: '已完成', action: '住宿信息', href: '#stays', done: true },
-  { id: 'train-cambridge-return', label: '确认 10/1 剑桥往返两程车票', detail: 'KGX ↔ CBG；一起比较往返票和两张单程票', group: '城外出行', action: '搜索车次', href: trainSeed[0].bookingUrl, done: false },
-  { id: 'train-seaford-return', label: '确认白崖当天的往返车票', detail: '暂定 10/3；VIC ↔ SEF 经 Lewes，结合天气和票种决定', group: '城外出行', action: '搜索车次', href: trainSeed[2].bookingUrl, done: false },
-  { id: 'white-cliffs-plan', label: '确认白崖短线与返程公交', detail: '查风雨、9/27 起公交新表和末班；选择观景短线', group: '城外出行', action: '查公交', href: transportSources.coaster, done: false },
-  { id: 'westminster-abbey', label: '决定是否预约威斯敏斯特教堂', detail: '09/30 下午可选；不入内也可沿公园与河岸散步', group: '景点安排', action: '官网查看', href: 'https://www.westminster-abbey.org/visit-us', done: false },
-  { id: 'cambridge-college', label: '确认 10/1 国王学院开放与门票', detail: '只选一所学院；撑篙看天气，不把多个学院排满', group: '景点安排', action: '官网查看', href: 'https://www.kings.cam.ac.uk/visit-kings', done: false },
-  { id: 'museum-oct2', label: '预约 10/2 大英博物馆免费时段', detail: '建议上午；若与白崖调换日期，同步调整预约', group: '景点安排', action: '官网预约', href: 'https://www.britishmuseum.org/visit', done: false },
-  { id: 'edinburgh-castle', label: '预约 Edinburgh Castle', detail: '10/05 上午；按实际预约时间入场', group: '景点安排', action: '官网预约', href: 'https://www.edinburghcastle.scot/plan-your-visit/tickets', done: false },
+  { id: 'train-london-edinburgh', label: '确认 10/4 伦敦 London → 爱丁堡 Edinburgh 车票', detail: '施工绕行；先核实实际时长和换乘，再订票', group: '优先处理', action: '搜索车次', href: trainSeed[4].bookingUrl, done: false },
+  { id: 'stay-london-booked', label: '已订伦敦青旅 Barmy Badger Backpackers · 5 晚', detail: 'Hostelworld · 09/29 入住、10/04 退房', group: '已完成', action: '住宿信息', href: '#stays', done: true },
+  { id: 'stay-edinburgh-booked', label: '已订城堡岩青旅 Castle Rock Hostel · 3 晚', detail: 'Hostelworld · 10/04 入住、10/07 退房', group: '已完成', action: '住宿信息', href: '#stays', done: true },
+  { id: 'train-cambridge-return', label: '确认 10/1 剑桥 Cambridge 往返两程车票', detail: 'KGX ↔ CBG；一起比较往返票和两张单程票', group: '城外出行', action: '搜索车次', href: trainSeed[0].bookingUrl, done: false },
+  { id: 'train-seaford-return', label: '确认七姐妹白崖 Seven Sisters 当天的往返车票', detail: '暂定 10/3；VIC ↔ SEF 经刘易斯 Lewes，结合天气和票种决定', group: '城外出行', action: '搜索车次', href: trainSeed[2].bookingUrl, done: false },
+  { id: 'white-cliffs-plan', label: '确认七姐妹白崖 Seven Sisters 短线与返程公交', detail: '查风雨、9/27 起公交新表和末班；选择观景短线', group: '城外出行', action: '查公交', href: transportSources.coaster, done: false },
+  { id: 'westminster-abbey', label: '决定是否预约威斯敏斯特教堂 Westminster Abbey', detail: '09/30 下午可选；不入内也可沿公园与河岸散步', group: '景点安排', action: '官网查看', href: 'https://www.westminster-abbey.org/visit-us', done: false },
+  { id: 'cambridge-college', label: '确认 10/1 国王学院 King’s College, Cambridge 开放与门票', detail: '只选一所学院；撑篙看天气，不把多个学院排满', group: '景点安排', action: '官网查看', href: 'https://www.kings.cam.ac.uk/visit-kings', done: false },
+  { id: 'museum-oct2', label: '预约 10/2 大英博物馆 British Museum 免费时段', detail: '建议上午；若与白崖调换日期，同步调整预约', group: '景点安排', action: '官网预约', href: 'https://www.britishmuseum.org/visit', done: false },
+  { id: 'edinburgh-castle', label: '预约爱丁堡城堡 Edinburgh Castle', detail: '10/05 上午；按实际预约时间入场', group: '景点安排', action: '官网预约', href: 'https://www.edinburghcastle.scot/plan-your-visit/tickets', done: false },
   { id: 'leave-dates', label: '请假：9/29、9/30、10/8', detail: '北京时间共 3 天；9/28 下班赴港，10/9 上班、10/10 补班', group: '出发准备', done: false },
   { id: 'insurance', label: '购买旅行保险', detail: '核对医疗、延误和行李保障范围', group: '出发准备', done: false },
   { id: 'card-first-payment', label: '确认银行卡可境外支付，现金暂留 £20', detail: '能刷卡就刷卡；£20 中留 £10 预备可退钥匙押金，核对主用卡及备用支付方式', group: '出发准备', action: '付款安排', href: '#money', done: false },
@@ -105,8 +105,8 @@ export const taskSeed: TaskItem[] = [
   { id: 'pack-shoes', label: '准备防滑耐走鞋', detail: '海岸和山路需要抓地力，不穿新鞋直接长走', group: '打包', done: false },
   { id: 'pack-tools', label: '准备转换插头、小锁和防水袋', detail: '自带挂锁、毛巾和转换头，减少青旅现金收费；加水瓶、充电宝', group: '打包', done: false },
   { id: 'weather-coast', label: '核对伦敦、剑桥、白崖和爱丁堡天气', detail: '临行和每天出门前看风雨；白崖可与伦敦日调换', group: '临行复核', done: false },
-  { id: 'airport', label: '确定深圳 → HKG 去程交通', detail: '目标 9/28 20:00 前到 HKG；如有需要提前下班', group: '出发准备', done: false },
-  { id: 'edi-airport', label: '确认 10/7 机场电车或 Airlink 100', detail: '从 Castle Rock 出发；选 Waverley Bridge 的 Airlink 100 或 Princes Street 电车，目标 09:45 到 EDI', group: '出发准备', action: '查电车', href: 'https://edinburghtrams.com/plan-journey/airport', done: false },
+  { id: 'airport', label: '确定深圳 Shenzhen → 香港国际机场 HKG 去程交通', detail: '目标 9/28 20:00 前到香港国际机场 Hong Kong International Airport（HKG）；如有需要提前下班', group: '出发准备', done: false },
+  { id: 'edi-airport', label: '确认 10/7 机场电车或 Airlink 100', detail: '从城堡岩青旅 Castle Rock Hostel 出发；选威瓦利桥 Waverley Bridge 的 Airlink 100 机场巴士或王子街 Princes Street 电车，目标 09:45 到爱丁堡机场 Edinburgh Airport（EDI）', group: '出发准备', action: '查电车', href: 'https://edinburghtrams.com/plan-journey/airport', done: false },
   { id: 'offline-v2', label: '保存新版路线、车票与地址', detail: '含两次当天往返、白崖返程公交、北上工程公告', group: '临行复核', done: false },
   { id: 'checkin', label: '完成去程在线值机', detail: '临行查看 SWISS App，保存两段登机牌', group: '9/27–9/28', done: false },
 ];

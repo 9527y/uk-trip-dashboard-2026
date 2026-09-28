@@ -31,10 +31,10 @@ const viewBounds: Record<MapView, [Coordinates, Coordinates]> = {
 };
 
 const mainStops = [
-  { id: 'london', label: '伦敦', symbol: '伦', color: '#e84632', detail: '09/29 入住 → 10/04 退房 · 5 晚 · Barmy Badger 已订<br>剑桥、白崖均当天往返，行李留在伦敦。' },
-  { id: 'cambridge', label: '剑桥', symbol: '剑', color: '#39756c', detail: '10/01 当天往返<br>伦敦 King’s Cross ⇄ Cambridge，晚上回伦敦。' },
-  { id: 'seaford', label: 'Seaford · 白崖', symbol: '崖', color: '#a67512', detail: '10/03 白崖当天往返<br>伦敦 → Lewes 换乘 → Seaford<br>转公交 12 到 Exceat / Seven Sisters Park Centre，再经桥到西岸小屋，原路返程。' },
-  { id: 'edinburgh', label: '爱丁堡', symbol: '爱', color: '#10243e', detail: '10/04 入住 → 10/07 退房 · 3 晚 · Castle Rock 已订<br>10/07 前往 EDI 机场返程。' },
+  { id: 'london', label: '伦敦 London', symbol: '伦', color: '#e84632', detail: '09/29 入住 → 10/04 退房 · 5 晚 · 伦敦青旅 Barmy Badger Backpackers 已订<br>剑桥、白崖均当天往返，行李留在伦敦。' },
+  { id: 'cambridge', label: '剑桥 Cambridge', symbol: '剑', color: '#39756c', detail: '10/01 当天往返<br>国王十字火车站 London King’s Cross ⇄ 剑桥火车站 Cambridge，晚上回伦敦。' },
+  { id: 'seaford', label: '锡福德 Seaford · 白崖 Seven Sisters', symbol: '崖', color: '#a67512', detail: '10/03 白崖当天往返<br>伦敦 London → 刘易斯 Lewes 换乘 → 锡福德 Seaford<br>转公交 12 到埃克西特 Exceat 地区的七姐妹公园中心公交站 Seven Sisters Park Centre，再经桥到海岸警卫队小屋 Coastguard Cottages，原路返程。' },
+  { id: 'edinburgh', label: '爱丁堡 Edinburgh', symbol: '爱', color: '#10243e', detail: '10/04 入住 → 10/07 退房 · 3 晚 · 城堡岩青旅 Castle Rock Hostel 已订<br>10/07 前往爱丁堡机场 Edinburgh Airport（EDI）返程。' },
 ];
 
 const mapLink = (query: string) => `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
@@ -67,22 +67,22 @@ export function RouteMap() {
         // Excursions return to London; they are not successive overnight stops.
         leaflet.polyline([locations.london, locations.cambridge], {
           color: '#39756c', weight: 4, opacity: 0.9,
-        }).bindPopup('10/01 · 伦敦 ⇄ 剑桥<br>当天往返，晚宿伦敦。').addTo(map);
+        }).bindPopup('10/01 · 伦敦 London ⇄ 剑桥 Cambridge<br>当天往返，晚宿伦敦。').addTo(map);
         leaflet.polyline([locations.london, locations.lewes, locations.seaford], {
           color: '#a67512', weight: 4, opacity: 0.9,
-        }).bindPopup('10/03 · 伦敦 ⇄ Lewes ⇄ Seaford<br>经 Lewes 换乘，当天回伦敦。').addTo(map);
+        }).bindPopup('10/03 · 伦敦 London ⇄ 刘易斯 Lewes ⇄ 锡福德 Seaford<br>经刘易斯 Lewes 换乘，当天回伦敦。').addTo(map);
         leaflet.polyline([locations.seaford, locations.exceat], {
           color: '#537f98', weight: 4, opacity: 0.9,
-        }).bindPopup('公交 12 · Seaford ⇄ Exceat / Seven Sisters Park Centre<br>去程乘 Eastbourne 方向；回程乘 Brighton 方向到 Seaford。').addTo(map);
+        }).bindPopup('公交 12 · 锡福德 Seaford ⇄ 七姐妹公园中心公交站 Seven Sisters Park Centre（埃克西特 Exceat）<br>去程乘伊斯特本 Eastbourne 方向；回程乘布莱顿 Brighton 方向到锡福德 Seaford。').addTo(map);
         leaflet.polyline([locations.exceat, locations.bridge, locations.cottages], {
           color: '#a67512', weight: 4, dashArray: '3 7', opacity: 0.9,
-        }).bindPopup('观景短线 · Exceat → 经桥到西岸 → 海岸警卫队小屋<br>沿正式步道原路返回公交站，不从河口涉水过河。连线仅示方向。').addTo(map);
+        }).bindPopup('观景短线 · 埃克西特 Exceat → 经桥到西岸 → 海岸警卫队小屋 Coastguard Cottages<br>沿正式步道原路返回公交站，不从河口涉水过河。连线仅示方向。').addTo(map);
         leaflet.polyline([locations.london, locations.newcastle], {
           color: '#e84632', weight: 4, opacity: 0.85,
-        }).bindPopup('10/04 · 伦敦 → 爱丁堡<br>北上途中不安排其他城市游玩。').addTo(map);
+        }).bindPopup('10/04 · 伦敦 London → 爱丁堡 Edinburgh<br>北上途中不安排其他城市游玩。').addTo(map);
         leaflet.polyline([locations.newcastle, locations.carlisle, locations.edinburgh], {
           color: '#e84632', weight: 4, dashArray: '8 7', opacity: 0.9,
-        }).bindPopup('10/04 · 工程绕行方向<br>Newcastle → Carlisle → Edinburgh<br>具体列车、停站与时长以当日售票结果为准。').addTo(map);
+        }).bindPopup('10/04 · 工程绕行方向<br>纽卡斯尔 Newcastle → 卡莱尔 Carlisle → 爱丁堡 Edinburgh<br>具体列车、停站与时长以当日售票结果为准。').addTo(map);
 
         mainStops.forEach((stop) => {
           const icon = leaflet.divIcon({
@@ -95,8 +95,8 @@ export function RouteMap() {
         });
 
         [
-          { id: 'heathrow', label: 'LHR', detail: '09/29 希思罗入境 → 伊丽莎白线进伦敦', destination: 'london' },
-          { id: 'edi', label: 'EDI', detail: '10/07 离境 · 市区乘 Airlink 100 或有轨电车前往机场', destination: 'edinburgh' },
+          { id: 'heathrow', label: '希思罗 LHR', detail: '09/29 希思罗机场 Heathrow Airport 入境 → 皮卡迪利线 Piccadilly line → 伯爵宫地铁站 Earl’s Court → 伦敦青旅 Barmy Badger Backpackers', destination: 'london' },
+          { id: 'edi', label: '爱丁堡 EDI', detail: '10/07 爱丁堡机场 Edinburgh Airport 离境 · 市区乘 Airlink 100 机场巴士或有轨电车 Edinburgh Trams 前往机场', destination: 'edinburgh' },
         ].forEach((airport) => {
           leaflet.polyline([locations[airport.id], locations[airport.destination]], {
             color: '#718292', weight: 2, dashArray: '3 5',
@@ -109,8 +109,8 @@ export function RouteMap() {
         });
 
         [
-          { id: 'newcastle', label: 'Newcastle', direction: 'right' as const },
-          { id: 'carlisle', label: 'Carlisle', direction: 'left' as const },
+          { id: 'newcastle', label: '纽卡斯尔 Newcastle', direction: 'right' as const },
+          { id: 'carlisle', label: '卡莱尔 Carlisle', direction: 'left' as const },
         ].forEach((station) => {
           leaflet.circleMarker(locations[station.id], {
             radius: 4, color: '#e84632', fillColor: '#fff', fillOpacity: 1, weight: 2,
@@ -121,16 +121,16 @@ export function RouteMap() {
 
         const coastDetails = leaflet.layerGroup([
           leaflet.circleMarker(locations.lewes, { radius: 5, color: '#a67512', fillColor: '#fff', fillOpacity: 1, weight: 2 })
-            .bindTooltip('Lewes · 换乘', { permanent: true, direction: 'left', className: 'trip-transit-label' })
-            .bindPopup('Lewes 换乘<br>乘 Seaford 方向列车，返程在此换乘回伦敦。'),
+            .bindTooltip('刘易斯 Lewes · 换乘', { permanent: true, direction: 'left', className: 'trip-transit-label' })
+            .bindPopup('刘易斯 Lewes 换乘<br>乘锡福德 Seaford 方向列车，返程在此换乘回伦敦 London。'),
           leaflet.circleMarker(locations.exceat, { radius: 5, color: '#537f98', fillColor: '#fff', fillOpacity: 1, weight: 3 })
-            .bindTooltip('Exceat · 公交 12 下车', { permanent: true, direction: 'top', offset: [0, -5], className: 'trip-transit-label' })
-            .bindPopup('Seven Sisters Park Centre / Exceat<br>乘公交 12 抵达后，先问询游客中心，再经 Exceat 桥走到河流西岸。'),
+            .bindTooltip('埃克西特 Exceat · 公交 12 下车', { permanent: true, direction: 'top', offset: [0, -5], className: 'trip-transit-label' })
+            .bindPopup('七姐妹公园中心公交站 Seven Sisters Park Centre · 埃克西特 Exceat<br>乘公交 12 抵达后，可到七姐妹游客中心 Seven Sisters Country Park Visitor Centre 问询，再经埃克西特桥 Exceat Bridge 走到河流西岸。'),
           leaflet.circleMarker(locations.bridge, { radius: 3, color: '#a67512', fillColor: '#fff', fillOpacity: 1, weight: 2 })
-            .bindPopup('Exceat Bridge<br>从桥上过河，沿西岸正式步道往海岸警卫队小屋。'),
+            .bindPopup('埃克西特桥 Exceat Bridge<br>从桥上过河，沿西岸正式步道往海岸警卫队小屋 Coastguard Cottages。'),
           leaflet.circleMarker(locations.cottages, { radius: 6, color: '#a67512', fillColor: '#fff', fillOpacity: 1, weight: 3 })
-            .bindTooltip('海岸警卫队小屋', { permanent: true, direction: 'bottom', offset: [0, 8], className: 'trip-transit-label' })
-            .bindPopup('Coastguard Cottages · 白崖观景短线<br>拍照后原路返回 Exceat，再乘公交 12 回 Seaford。'),
+            .bindTooltip('海岸警卫队小屋 Coastguard Cottages', { permanent: true, direction: 'bottom', offset: [0, 8], className: 'trip-transit-label' })
+            .bindPopup('海岸警卫队小屋 Coastguard Cottages · 七姐妹白崖 Seven Sisters 观景短线<br>拍照后原路返回埃克西特 Exceat，再乘公交 12 回锡福德 Seaford。'),
         ]);
         const updateDetails = () => {
           if (map.getZoom() >= 9) coastDetails.addTo(map);
@@ -164,7 +164,7 @@ export function RouteMap() {
     <div className="route-map-v2">
       <div className="trip-map-controls" aria-label="地图范围">
         <div className="trip-map-views">
-          {([['full', '查看全程'], ['london', '伦敦周边'], ['coast', '白崖短线']] as const).map(([id, label]) => (
+          {([['full', '查看全程'], ['london', '伦敦周边 London'], ['coast', '白崖短线 Seven Sisters']] as const).map(([id, label]) => (
             <button key={id} type="button" aria-pressed={view === id} disabled={!mapReady || mapError} onClick={() => showView(id)}>{label}</button>
           ))}
         </div>
@@ -179,26 +179,26 @@ export function RouteMap() {
         <aside className="trip-route-summary" aria-label="住宿基地与往返支线">
           <div className="trip-base-card">
             <span className="trip-base-symbol">伦</span>
-            <div><strong>伦敦 · 5 晚</strong><span>09/29 入住 → 10/04 退房</span><small>{londonStay.name} · 已订<br />Earl’s Court；两次出游都回这里。</small></div>
-            <a href={mapLink(londonStay.query)} target="_blank" rel="noreferrer" aria-label="在 Google Maps 查看 Barmy Badger"><ExternalLink /></a>
+            <div><strong>伦敦 London · 5 晚</strong><span>09/29 入住 → 10/04 退房</span><small>{londonStay.name} · 已订<br />伯爵宫 Earl’s Court；两次出游都回这里。</small></div>
+            <a href={mapLink(londonStay.query)} target="_blank" rel="noreferrer" aria-label="在 Google Maps 查看伦敦青旅 Barmy Badger Backpackers"><ExternalLink /></a>
           </div>
           <div className="trip-excursions">
             <article className="trip-branch trip-branch-cambridge">
-              <p><ArrowLeftRight /> 10/01 · 剑桥当天往返</p>
-              <strong>伦敦 ⇄ 剑桥</strong><span>King’s Cross ⇄ Cambridge</span>
-              <a href={mapLink('Cambridge Station UK')} target="_blank" rel="noreferrer">剑桥车站 <ExternalLink /></a>
+              <p><ArrowLeftRight /> 10/01 · 剑桥 Cambridge 当天往返</p>
+              <strong>伦敦 London ⇄ 剑桥 Cambridge</strong><span>国王十字火车站 London King’s Cross ⇄ 剑桥火车站 Cambridge</span>
+              <a href={mapLink('Cambridge Station UK')} target="_blank" rel="noreferrer">剑桥火车站 Cambridge <ExternalLink /></a>
             </article>
             <article className="trip-branch trip-branch-coast">
-              <p><ArrowLeftRight /> 10/03 · 白崖当天往返</p>
-              <strong>伦敦 ⇄ Lewes ⇄ Seaford</strong><span>Seaford 乘公交 12 到 Exceat，经桥走西岸至小屋；原路返回。</span>
-              <div className="trip-place-links"><a href={mapLink('Seaford Railway Station UK')} target="_blank" rel="noreferrer">Seaford 站 <ExternalLink /></a><a href={mapLink('Seven Sisters Country Park Visitor Centre Exceat')} target="_blank" rel="noreferrer">Exceat 游客中心 <ExternalLink /></a><a href={mapLink('Coastguard Cottages Cuckmere Haven')} target="_blank" rel="noreferrer">观景小屋 <ExternalLink /></a></div>
+              <p><ArrowLeftRight /> 10/03 · 七姐妹白崖 Seven Sisters 当天往返</p>
+              <strong>伦敦 London ⇄ 刘易斯 Lewes ⇄ 锡福德 Seaford</strong><span>锡福德 Seaford 乘公交 12 到埃克西特 Exceat，经桥走西岸至海岸警卫队小屋 Coastguard Cottages；原路返回。</span>
+              <div className="trip-place-links"><a href={mapLink('Seaford Railway Station UK')} target="_blank" rel="noreferrer">锡福德火车站 Seaford <ExternalLink /></a><a href={mapLink('Seven Sisters Country Park Visitor Centre Exceat')} target="_blank" rel="noreferrer">七姐妹游客中心 Seven Sisters Country Park Visitor Centre（埃克西特 Exceat）<ExternalLink /></a><a href={mapLink('Coastguard Cottages Cuckmere Haven')} target="_blank" rel="noreferrer">海岸警卫队小屋 Coastguard Cottages <ExternalLink /></a></div>
             </article>
           </div>
-          <div className="trip-northbound"><TrainFront /><div><strong>10/04 · 伦敦 → 爱丁堡</strong><span>工程绕行：Newcastle → Carlisle → Edinburgh。此日留足交通时间。</span><a href="https://www.nationalrail.co.uk/engineering-works/ncl-3-oct-20261003/" target="_blank" rel="noreferrer">查看官方工程公告 <ExternalLink /></a></div></div>
+          <div className="trip-northbound"><TrainFront /><div><strong>10/04 · 伦敦 London → 爱丁堡 Edinburgh</strong><span>工程绕行：纽卡斯尔 Newcastle → 卡莱尔 Carlisle → 爱丁堡 Edinburgh。此日留足交通时间。</span><a href="https://www.nationalrail.co.uk/engineering-works/ncl-3-oct-20261003/" target="_blank" rel="noreferrer">查看官方工程公告 <ExternalLink /></a></div></div>
           <div className="trip-base-card trip-base-edinburgh">
             <span className="trip-base-symbol">爱</span>
-            <div><strong>爱丁堡 · 3 晚</strong><span>10/04 入住 → 10/07 退房</span><small>{edinburghStay.name} · 已订<br />城堡脚下；10/07 从 EDI 机场返程。</small></div>
-            <a href={mapLink(edinburghStay.query)} target="_blank" rel="noreferrer" aria-label="在 Google Maps 查看 Castle Rock Hostel"><ExternalLink /></a>
+            <div><strong>爱丁堡 Edinburgh · 3 晚</strong><span>10/04 入住 → 10/07 退房</span><small>{edinburghStay.name} · 已订<br />爱丁堡城堡 Edinburgh Castle 脚下；10/07 从爱丁堡机场 Edinburgh Airport（EDI）返程。</small></div>
+            <a href={mapLink(edinburghStay.query)} target="_blank" rel="noreferrer" aria-label="在 Google Maps 查看城堡岩青旅 Castle Rock Hostel"><ExternalLink /></a>
           </div>
         </aside>
       </div>
@@ -207,7 +207,7 @@ export function RouteMap() {
         <span><i className="trip-line-key trip-line-diversion" /> 工程绕行</span>
         <span><i className="trip-line-key trip-line-cambridge" /> 剑桥往返</span>
         <span><i className="trip-line-key trip-line-coast" /> 白崖往返</span>
-        <span><BusFront className="trip-bus-key" /> 公交 12 接驳</span><span><Footprints /> 短线步行</span><span><Plane /> LHR 入境 · EDI 离境</span>
+        <span><BusFront className="trip-bus-key" /> 公交 12 接驳</span><span><Footprints /> 短线步行</span><span><Plane /> 希思罗 Heathrow（LHR）入境 · 爱丁堡 Edinburgh（EDI）离境</span>
       </div>
       <p className="trip-map-note">连线仅表示移动方向，不是实际铁轨或徒步导航。剑桥与白崖分两天从伦敦出发；白崖日期可随天气调整。绕行列车的时刻、停站及用时，以实际售票结果为准。</p>
     </div>
