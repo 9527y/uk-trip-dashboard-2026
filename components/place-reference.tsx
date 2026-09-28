@@ -30,7 +30,7 @@ export function PlaceReference() {
   return (
     <section className="section" id="place-names" aria-labelledby="place-names-title">
       <div className="section-heading"><div><p className="eyebrow"><MapPin /> 中英地名</p><h2 id="place-names-title">问路、搜地图，直接用英文名</h2></div></div>
-      <p className="section-intro">每天的地点已标注中文和英文。下面也收录了刚讨论过的伦敦散步参考点；具体去哪些地方，以当天行程为准。英文搜索词可直接复制。</p>
+      <p className="section-intro">每天的地点已在<a href="#route">逐日行程表</a>中标注中文和英文。下面也收录了刚讨论过的伦敦散步参考点；具体去哪些地方，以当天行程为准。英文搜索词可直接复制。</p>
       <details className="place-reference" open>
         <summary>伦敦景点与街区 · London</summary>
         <div className="place-reference-grid">

@@ -293,7 +293,7 @@ export default function Home() {
     <main>
       <nav className="topbar" aria-label="页面导航">
         <a className="brand" href="#now" aria-label="返回当前安排"><span className="brand-mark">UK</span><span>Tripboard</span></a>
-        <div className="nav-links"><a href="#now">现在</a><a href="#todo">待办</a><a href="#stays">住宿</a><a href="#packing">穿衣</a><a href="#trains">火车</a><a href="#local-transport">公交</a><a href="#map">地图</a><a href="#place-names">地名</a><a href="#route">行程</a><a href="#money">换汇</a></div>
+        <div className="nav-links"><a href="#now">现在</a><a href="#todo">待办</a><a href="#stays">住宿</a><a href="#packing">穿衣</a><a href="#trains">火车</a><a href="#local-transport">公交</a><a href="#map">地图</a><a href="#place-names">地名</a><a href="#route">行程表</a><a href="#money">换汇</a></div>
         <span className="date-chip">9/28–10/08</span>
       </nav>
 
@@ -484,8 +484,8 @@ export default function Home() {
         <LocalTransport />
 
         <section className="section route-section" id="route">
-          <div className="section-heading"><div><p className="eyebrow"><MapPin /> 逐日执行</p><h2>每天留一点余地</h2></div><span className="section-metric">8 晚 · 2 处基地</span></div>
-          <p className="section-intro">以下为英国当地时间和建议节奏；点“地图导航”从你的位置出发。白崖暂定 10/3，天气调整后请同步修改预约和往返车票。</p>
+          <div className="section-heading"><div><p className="eyebrow"><MapPin /> 逐日执行</p><h2>逐日行程表 · 中英对照</h2></div><span className="section-metric">8 晚 · 2 处基地</span></div>
+          <p className="section-intro">每一天的景点、车站、餐馆和住宿直接标注中文＋英文；问路可出示英文名，搜地图可复制地点下方的英文搜索词，或点“地图导航”。时间为英国当地时间；白崖暂定 10/3，换日请同步调整预约和往返车票。</p>
           <div className="timeline">
             {days.map((day, index) => {
               const start = new Date(day.start).getTime();
